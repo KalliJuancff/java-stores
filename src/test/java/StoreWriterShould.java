@@ -29,19 +29,24 @@ public class StoreWriterShould {
         assertThat(store.status()).isEqualTo("OPEN");
     }
 
-    @Test
-    public void write_a_closed_store() {
+    @ParameterizedTest
+    @CsvSource({
+            "1000, Store #1000, 2003/12/25, 2005/01/06, ''",
+            "2000, Store #2000, 2024/12/23, 2024/11/25, ''",
+            "3000, Store #3000, 2025/01/14, 2025/01/29, ''"
+    })
+    public void write_a_closed_store(int storeCode, String storeName, String storeOpeningDate, String storeClosingDate, String storeExpectedOpeningDate) {
         var storeRepository = new InMemoryStoreRepository();
         var storeWriter = new StoreWriter(storeRepository);
 
-        storeWriter.write(1000, "Store #1000", "2024/12/23", "2024/12/25", "");
+        storeWriter.write(storeCode, storeName, storeOpeningDate, storeClosingDate, storeExpectedOpeningDate);
 
         Store store = storeRepository.getFirst();
-        assertThat(store.code()).isEqualTo(1000);
-        assertThat(store.name()).isEqualTo("Store #1000");
-        assertThat(store.openingDate()).isEqualTo(Optional.of(LocalDate.of(2024, 12, 23)));
-        assertThat(store.closingDate()).isEqualTo(Optional.of(LocalDate.of(2024, 12, 25)));
-        assertThat(store.expectedOpeningDate()).isEqualTo("");
+        assertThat(store.code()).isEqualTo(storeCode);
+        assertThat(store.name()).isEqualTo(storeName);
+        assertThat(store.openingDate()).isEqualTo(Optional.of(LocalDate.parse(storeOpeningDate.replace("/", "-"))));
+        assertThat(store.closingDate()).isEqualTo(Optional.of(LocalDate.parse(storeClosingDate.replace("/", "-"))));
+        assertThat(store.expectedOpeningDate()).isEqualTo(storeExpectedOpeningDate);
         assertThat(store.status()).isEqualTo("CLOSED");
     }
 }
