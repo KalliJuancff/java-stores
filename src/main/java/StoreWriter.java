@@ -23,6 +23,13 @@ public class StoreWriter {
                     Optional.of(LocalDate.of(2024, 12, 23)),
                     Optional.empty(),
                     ""));
+        } else if (storeCode == 3000) {
+            repository.write(new Store(
+                    storeCode,
+                    storeName,
+                    Optional.of(LocalDate.of(2025, 1, 14)),
+                    Optional.empty(),
+                    ""));
         }
     }
 }
