@@ -9,10 +9,21 @@ public class StoreWriter {
     }
 
     public void write(int storeCode, String storeName, String storeOpeningDate, String storeClosingDate, String storeExpectedOpeningDate) {
-        repository.write(Store.createOpenStore(
-                storeCode,
-                storeName,
-                Optional.of(LocalDate.parse(storeOpeningDate.replace("/", "-")))
-        ));
+        if (storeClosingDate.isEmpty()) {
+            repository.write(new Store(
+                    storeCode,
+                    storeName,
+                    Optional.of(LocalDate.parse(storeOpeningDate.replace("/", "-"))),
+                    Optional.empty(),
+                    ""));
+        } else {
+            repository.write(new Store(
+                    storeCode,
+                    storeName,
+                    Optional.of(LocalDate.parse(storeOpeningDate.replace("/", "-"))),
+                    Optional.of(LocalDate.parse(storeClosingDate.replace("/", "-"))),
+                    storeExpectedOpeningDate
+            ));
+        }
     }
 }

@@ -8,11 +8,7 @@ public class Store {
     private final Optional<LocalDate> closingDate;
     private final String expectedOpeningDate;
 
-    public static Store createOpenStore(int code, String name, Optional<LocalDate> openingDate) {
-        return new Store(code, name, openingDate, Optional.empty(), "");
-    }
-
-    private Store(int code, String name, Optional<LocalDate> openingDate, Optional<LocalDate> closingDate, String expectedOpeningDate) {
+    public Store(int code, String name, Optional<LocalDate> openingDate, Optional<LocalDate> closingDate, String expectedOpeningDate) {
         this.code = code;
         this.name = name;
         this.openingDate = openingDate;
@@ -41,6 +37,10 @@ public class Store {
     }
 
     public String status() {
+        if (closingDate.isPresent()) {
+            return "CLOSED";
+        }
+
         return "OPEN";
     }
 }

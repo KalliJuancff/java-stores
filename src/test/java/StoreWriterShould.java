@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -26,5 +27,21 @@ public class StoreWriterShould {
         assertThat(store.closingDate()).isEqualTo(Optional.empty());
         assertThat(store.expectedOpeningDate()).isEqualTo(storeExpectedOpeningDate);
         assertThat(store.status()).isEqualTo("OPEN");
+    }
+
+    @Test
+    public void write_a_closed_store() {
+        var storeRepository = new InMemoryStoreRepository();
+        var storeWriter = new StoreWriter(storeRepository);
+
+        storeWriter.write(1000, "Store #1000", "2024/12/23", "2024/12/25", "");
+
+        Store store = storeRepository.getFirst();
+        assertThat(store.code()).isEqualTo(1000);
+        assertThat(store.name()).isEqualTo("Store #1000");
+        assertThat(store.openingDate()).isEqualTo(Optional.of(LocalDate.of(2024, 12, 23)));
+        assertThat(store.closingDate()).isEqualTo(Optional.of(LocalDate.of(2024, 12, 25)));
+        assertThat(store.expectedOpeningDate()).isEqualTo("");
+        assertThat(store.status()).isEqualTo("CLOSED");
     }
 }
