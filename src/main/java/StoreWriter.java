@@ -12,8 +12,7 @@ public class StoreWriter {
         repository.write(Store.createOpenStore(
                 storeCode,
                 storeName,
-                Optional.of(LocalDate.parse(storeOpeningDate.replace("/", "-"))),
-                Optional.empty(),
-                ""));
+                Optional.of(LocalDate.parse(storeOpeningDate.replace("/", "-")))
+        ));
     }
 }
