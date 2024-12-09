@@ -65,4 +65,20 @@ public class StoreWriterShould {
         assertThat(store.expectedOpeningDate()).isEqualTo("First quarter of 2003");
         assertThat(store.status()).isEqualTo("EXPECTED_OPENING");
     }
+
+    @Test
+    public void write_an_expected_opening_store_V2() {
+        var storeRepository = new InMemoryStoreRepository();
+        var storeWriter = new StoreWriter(storeRepository);
+
+        storeWriter.write(2000, "Store #2000", "", "", "January 2034");
+
+        Store store = storeRepository.getFirst();
+        assertThat(store.code()).isEqualTo(2000);
+        assertThat(store.name()).isEqualTo("Store #2000");
+        assertThat(store.openingDate()).isEqualTo(Optional.empty());
+        assertThat(store.closingDate()).isEqualTo(Optional.empty());
+        assertThat(store.expectedOpeningDate()).isEqualTo("January 2025");
+        assertThat(store.status()).isEqualTo("EXPECTED_OPENING");
+    }
 }
