@@ -9,7 +9,7 @@ public class StoreWriter {
     }
 
     public void write(int storeCode, String storeName, String storeOpeningDate, String storeClosingDate, String storeExpectedOpeningDate) {
-        repository.write(new Store(
+        repository.write(Store.createOpenStore(
                 storeCode,
                 storeName,
                 Optional.of(LocalDate.parse(storeOpeningDate.replace("/", "-"))),

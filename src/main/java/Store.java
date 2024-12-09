@@ -8,7 +8,11 @@ public class Store {
     private final Optional<LocalDate> closingDate;
     private final String expectedOpeningDate;
 
-    public Store(int code, String name, Optional<LocalDate> openingDate, Optional<LocalDate> closingDate, String expectedOpeningDate) {
+    public static Store createOpenStore(int code, String name, Optional<LocalDate> openingDate, Optional<LocalDate> closingDate, String expectedOpeningDate) {
+        return new Store(code, name, openingDate, closingDate, expectedOpeningDate);
+    }
+
+    private Store(int code, String name, Optional<LocalDate> openingDate, Optional<LocalDate> closingDate, String expectedOpeningDate) {
         this.code = code;
         this.name = name;
         this.openingDate = openingDate;
