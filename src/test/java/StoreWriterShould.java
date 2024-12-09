@@ -1,4 +1,5 @@
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -6,51 +7,24 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StoreWriterShould {
-    @Test
-    public void write_an_open_store() {
+    @ParameterizedTest
+    @CsvSource({
+            "1000, Store #1000, 2003/12/25, '', ''",
+            "2000, Store #2000, 2024/12/23, '', ''",
+            "3000, Store #3000, 2025/01/14, '', ''"
+    })
+    public void write_an_open_store(int storeCode, String storeName, String storeOpeningDate, String storeClosingDate, String storeExpectedOpeningDate) {
         var storeRepository = new InMemoryStoreRepository();
         var storeWriter = new StoreWriter(storeRepository);
 
-        storeWriter.write(1000, "Store #1000", "2003/12/25", "", "");
+        storeWriter.write(storeCode, storeName, storeOpeningDate, storeClosingDate, storeExpectedOpeningDate);
 
         Store store = storeRepository.getFirst();
-        assertThat(store.code()).isEqualTo(1000);
-        assertThat(store.name()).isEqualTo("Store #1000");
-        assertThat(store.openingDate()).isEqualTo(Optional.of(LocalDate.of(2003, 12, 25)));
+        assertThat(store.code()).isEqualTo(storeCode);
+        assertThat(store.name()).isEqualTo(storeName);
+        assertThat(store.openingDate()).isEqualTo(Optional.of(LocalDate.parse(storeOpeningDate.replace("/", "-"))));
         assertThat(store.closingDate()).isEqualTo(Optional.empty());
-        assertThat(store.expectedOpeningDate()).isEqualTo("");
-        assertThat(store.status()).isEqualTo("OPEN");
-    }
-
-    @Test
-    public void write_an_open_store_v2() {
-        var storeRepository = new InMemoryStoreRepository();
-        var storeWriter = new StoreWriter(storeRepository);
-
-        storeWriter.write(2000, "Store #2000", "2024/12/23", "", "");
-
-        Store store = storeRepository.getFirst();
-        assertThat(store.code()).isEqualTo(2000);
-        assertThat(store.name()).isEqualTo("Store #2000");
-        assertThat(store.openingDate()).isEqualTo(Optional.of(LocalDate.of(2024, 12, 23)));
-        assertThat(store.closingDate()).isEqualTo(Optional.empty());
-        assertThat(store.expectedOpeningDate()).isEqualTo("");
-        assertThat(store.status()).isEqualTo("OPEN");
-    }
-
-    @Test
-    public void write_an_open_store_v3() {
-        var storeRepository = new InMemoryStoreRepository();
-        var storeWriter = new StoreWriter(storeRepository);
-
-        storeWriter.write(3000, "Store #3000", "2025/01/14", "", "");
-
-        Store store = storeRepository.getFirst();
-        assertThat(store.code()).isEqualTo(3000);
-        assertThat(store.name()).isEqualTo("Store #3000");
-        assertThat(store.openingDate()).isEqualTo(Optional.of(LocalDate.of(2025, 1, 14)));
-        assertThat(store.closingDate()).isEqualTo(Optional.empty());
-        assertThat(store.expectedOpeningDate()).isEqualTo("");
+        assertThat(store.expectedOpeningDate()).isEqualTo(storeExpectedOpeningDate);
         assertThat(store.status()).isEqualTo("OPEN");
     }
 }
