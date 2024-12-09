@@ -37,6 +37,10 @@ public class Store {
     }
 
     public String status() {
+        if (openingDate.isEmpty() && closingDate.isEmpty()) {
+            return "EXPECTED_OPENING";
+        }
+
         if (closingDate.isPresent()) {
             return "CLOSED";
         }
