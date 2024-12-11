@@ -32,4 +32,19 @@ public class StoreFactoryShould {
 
         assertThat(store.status()).isEqualTo("CLOSED");
     }
+
+    @Test
+    public void create_an_expected_opening_store() {
+        StoreWriterRequest request = new StoreWriterRequest(
+                9999,
+                "Store #9999",
+                "",
+                "",
+                "Summer 2025"
+        );
+
+        Store store = StoreFactory.createStore(request);
+
+        assertThat(store.status()).isEqualTo("EXPECTED_OPENING");
+    }
 }
