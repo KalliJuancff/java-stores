@@ -24,9 +24,17 @@ public class StoreWriterShould {
             "3000, Store #3000, 2025/01/14, '', ''"
     })
     public void write_an_open_store(int storeCode, String storeName, String storeOpeningDate, String storeClosingDate, String storeExpectedOpeningDate) {
-        storeWriter.write(storeCode, storeName, storeOpeningDate, storeClosingDate, storeExpectedOpeningDate);
+        StoreWriterRequest request = new StoreWriterRequest(
+                storeCode,
+                storeName,
+                storeOpeningDate,
+                storeClosingDate,
+                storeExpectedOpeningDate);
 
-        assertStore(storeCode,
+        storeWriter.write(request);
+
+        assertStore(
+                storeCode,
                 storeName,
                 Optional.of(LocalDate.parse(storeOpeningDate.replace("/", "-"))),
                 Optional.empty(),
@@ -42,9 +50,17 @@ public class StoreWriterShould {
             "3000, Store #3000, 2025/01/14, 2025/01/29, ''"
     })
     public void write_a_closed_store(int storeCode, String storeName, String storeOpeningDate, String storeClosingDate, String storeExpectedOpeningDate) {
-        storeWriter.write(storeCode, storeName, storeOpeningDate, storeClosingDate, storeExpectedOpeningDate);
+        StoreWriterRequest request = new StoreWriterRequest(
+                storeCode,
+                storeName,
+                storeOpeningDate,
+                storeClosingDate,
+                storeExpectedOpeningDate);
 
-        assertStore(storeCode,
+        storeWriter.write(request);
+
+        assertStore(
+                storeCode,
                 storeName,
                 Optional.of(LocalDate.parse(storeOpeningDate.replace("/", "-"))),
                 Optional.of(LocalDate.parse(storeClosingDate.replace("/", "-"))),
@@ -60,9 +76,17 @@ public class StoreWriterShould {
             "3000, Store #3000, '', '', Winter 2003"
     })
     public void write_an_expected_opening_store(int storeCode, String storeName, String storeOpeningDate, String storeClosingDate, String storeExpectedOpeningDate) {
-        storeWriter.write(storeCode, storeName, storeOpeningDate, storeClosingDate, storeExpectedOpeningDate);
+        StoreWriterRequest request = new StoreWriterRequest(
+                storeCode,
+                storeName,
+                storeOpeningDate,
+                storeClosingDate,
+                storeExpectedOpeningDate);
 
-        assertStore(storeCode,
+        storeWriter.write(request);
+
+        assertStore(
+                storeCode,
                 storeName,
                 Optional.empty(),
                 Optional.empty(),
