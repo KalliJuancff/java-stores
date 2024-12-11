@@ -53,13 +53,24 @@ public class StoreWriterShould {
     }
 
     private static void assertThatStoreIsOpen(int storeCode, String storeName, String storeOpeningDate, String storeExpectedOpeningDate, InMemoryStoreRepository storeRepository) {
+        assertStore(storeCode,
+                storeName,
+                Optional.of(LocalDate.parse(storeOpeningDate.replace("/", "-"))),
+                Optional.empty(),
+                storeExpectedOpeningDate,
+                storeRepository,
+                "OPEN"
+        );
+    }
+
+    private static void assertStore(int storeCode, String storeName, Optional<LocalDate> storeOpeningDate, Optional<Object> storeClosingDate, String storeExpectedOpeningDate, InMemoryStoreRepository storeRepository, String status) {
         Store store = storeRepository.getFirst();
         assertThat(store.code()).isEqualTo(storeCode);
         assertThat(store.name()).isEqualTo(storeName);
-        assertThat(store.openingDate()).isEqualTo(Optional.of(LocalDate.parse(storeOpeningDate.replace("/", "-"))));
-        assertThat(store.closingDate()).isEqualTo(Optional.empty());
+        assertThat(store.openingDate()).isEqualTo(storeOpeningDate);
+        assertThat(store.closingDate()).isEqualTo(storeClosingDate);
         assertThat(store.expectedOpeningDate()).isEqualTo(storeExpectedOpeningDate);
-        assertThat(store.status()).isEqualTo("OPEN");
+        assertThat(store.status()).isEqualTo(status);
     }
 
     private static void assertThatStoreIsClosed(int storeCode, String storeName, String storeOpeningDate, String storeClosingDate, String storeExpectedOpeningDate, InMemoryStoreRepository storeRepository) {
@@ -82,4 +93,3 @@ public class StoreWriterShould {
         assertThat(store.status()).isEqualTo("EXPECTED_OPENING");
     }
 }
-\
