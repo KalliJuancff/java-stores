@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -7,6 +8,15 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StoreWriterShould {
+    private InMemoryStoreRepository storeRepository;
+    private StoreWriter storeWriter;
+
+    @BeforeEach
+    public void setUp() {
+        storeRepository = new InMemoryStoreRepository();
+        storeWriter = new StoreWriter(storeRepository);
+    }
+
     @ParameterizedTest
     @CsvSource({
             "1000, Store #1000, 2003/12/25, '', ''",
@@ -14,9 +24,6 @@ public class StoreWriterShould {
             "3000, Store #3000, 2025/01/14, '', ''"
     })
     public void write_an_open_store(int storeCode, String storeName, String storeOpeningDate, String storeClosingDate, String storeExpectedOpeningDate) {
-        var storeRepository = new InMemoryStoreRepository();
-        var storeWriter = new StoreWriter(storeRepository);
-
         storeWriter.write(storeCode, storeName, storeOpeningDate, storeClosingDate, storeExpectedOpeningDate);
 
         assertStore(storeCode,
@@ -24,7 +31,6 @@ public class StoreWriterShould {
                 Optional.of(LocalDate.parse(storeOpeningDate.replace("/", "-"))),
                 Optional.empty(),
                 storeExpectedOpeningDate,
-                storeRepository,
                 "OPEN"
         );
     }
@@ -36,9 +42,6 @@ public class StoreWriterShould {
             "3000, Store #3000, 2025/01/14, 2025/01/29, ''"
     })
     public void write_a_closed_store(int storeCode, String storeName, String storeOpeningDate, String storeClosingDate, String storeExpectedOpeningDate) {
-        var storeRepository = new InMemoryStoreRepository();
-        var storeWriter = new StoreWriter(storeRepository);
-
         storeWriter.write(storeCode, storeName, storeOpeningDate, storeClosingDate, storeExpectedOpeningDate);
 
         assertStore(storeCode,
@@ -46,7 +49,6 @@ public class StoreWriterShould {
                 Optional.of(LocalDate.parse(storeOpeningDate.replace("/", "-"))),
                 Optional.of(LocalDate.parse(storeClosingDate.replace("/", "-"))),
                 storeExpectedOpeningDate,
-                storeRepository,
                 "CLOSED"
         );
     }
@@ -58,9 +60,6 @@ public class StoreWriterShould {
             "3000, Store #3000, '', '', Winter 2003"
     })
     public void write_an_expected_opening_store(int storeCode, String storeName, String storeOpeningDate, String storeClosingDate, String storeExpectedOpeningDate) {
-        var storeRepository = new InMemoryStoreRepository();
-        var storeWriter = new StoreWriter(storeRepository);
-
         storeWriter.write(storeCode, storeName, storeOpeningDate, storeClosingDate, storeExpectedOpeningDate);
 
         assertStore(storeCode,
@@ -68,12 +67,11 @@ public class StoreWriterShould {
                 Optional.empty(),
                 Optional.empty(),
                 storeExpectedOpeningDate,
-                storeRepository,
                 "EXPECTED_OPENING"
         );
     }
 
-    private static void assertStore(int storeCode, String storeName, Optional<LocalDate> storeOpeningDate, Optional<Object> storeClosingDate, String storeExpectedOpeningDate, InMemoryStoreRepository storeRepository, String status) {
+    private void assertStore(int storeCode, String storeName, Optional<LocalDate> storeOpeningDate, Optional<Object> storeClosingDate, String storeExpectedOpeningDate, String status) {
         Store store = storeRepository.getFirst();
         assertThat(store.code()).isEqualTo(storeCode);
         assertThat(store.name()).isEqualTo(storeName);
