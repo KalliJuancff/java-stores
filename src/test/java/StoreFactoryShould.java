@@ -89,6 +89,21 @@ public class StoreFactoryShould {
                 "An expected opening store must not have an opening date");
     }
 
+    @Test
+    public void report_when_a_request_includes_all_dates() {
+        StoreWriterRequest request = new StoreWriterRequest(
+                9992,
+                "Store #9992",
+                "2024/12/25",
+                "2025/01/06",
+                "Spring 2024"
+        );
+
+        assertThatStoreCannotBeCreatedWithErrorMessageOf(
+                StoreFactory.createStore(request),
+                "Unable to determine type of store to create");
+    }
+
 
     private static void assertThatStoreCanBeCreated(Either<String, Store> storeOrError) {
         assertThat(storeOrError.isRight()).isTrue();

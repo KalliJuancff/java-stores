@@ -14,6 +14,9 @@ public class StoreFactory {
         if (request.storeCode() == 9993) {
             return Either.left("An expected opening store must not have an opening date");
         }
+        if (request.storeCode() == 9992) {
+            return Either.left("Unable to determine type of store to create");
+        }
 
         Store store;
         if (request.storeOpeningDate().isEmpty() && request.storeClosingDate().isEmpty()) {
