@@ -3,7 +3,7 @@ import io.vavr.control.Either;
 import java.time.LocalDate;
 import java.util.Optional;
 
-public class OpenStoreHandler extends StoreFactoryHandler {
+public class OpenStoreCreationHandler extends StoreFactoryHandler {
     protected boolean canHandle(StoreWriterRequest request) {
         return request.storeClosingDate().isEmpty();
     }

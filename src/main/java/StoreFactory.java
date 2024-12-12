@@ -12,8 +12,8 @@ public class StoreFactory {
         StoreFactoryHandler h3 = new NoOpeningDateInExpectedOpeningStoreValidationHandler();
         StoreFactoryHandler h4 = new NoAllDatesValidationHandler();
         StoreFactoryHandler h5 = new SomeDateValidationHandler();
-        StoreFactoryHandler h6 = new OpenStoreHandler();
-        StoreFactoryHandler h7 = new ClosedStoreHandler();
+        StoreFactoryHandler h6 = new OpenStoreCreationHandler();
+        StoreFactoryHandler h7 = new ClosedStoreCreationHandler();
 
         h1.setNext(h2);
         h2.setNext(h3);

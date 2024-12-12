@@ -3,7 +3,7 @@ import io.vavr.control.Either;
 import java.time.LocalDate;
 import java.util.Optional;
 
-public class ClosedStoreHandler extends StoreFactoryHandler {
+public class ClosedStoreCreationHandler extends StoreFactoryHandler {
     protected boolean canHandle(StoreWriterRequest request) {
         return true;
     }
