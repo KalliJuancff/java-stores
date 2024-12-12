@@ -12,7 +12,7 @@ public class StoreFactory {
             return new storeCode9994Handler().createStore(request);
         }
         if (request.storeCode() == 9993) {
-            return Either.left("An expected opening store must not have an opening date");
+            return new storeCode9993Handler().createStore(request);
         }
         if (request.storeCode() == 9992 || request.storeCode() == 9991) {
             return Either.left("Unable to determine type of store to create");
