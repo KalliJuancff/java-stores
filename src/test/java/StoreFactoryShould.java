@@ -45,16 +45,46 @@ public class StoreFactoryShould {
 
 
     @Test
-    public void reports_when_a_request_to_create_a_closed_store_does_not_include_opening_date() {
+    public void reports_when_a_request_does_not_include_any_dates() {
         StoreWriterRequest request = new StoreWriterRequest(
                 9995,
                 "Store #9995",
+                "",
+                "",
+                ""
+        );
+
+        assertThatStoreCannotBeCreated(
+                StoreFactory.createStore(request),
+                "Unable to determine type of store to create");
+    }
+
+    @Test
+    public void reports_when_a_request_includes_all_dates() {
+        StoreWriterRequest request = new StoreWriterRequest(
+                9994,
+                "Store #9994",
+                "2024/12/25",
+                "2025/01/06",
+                "Spring 2024"
+        );
+
+        assertThatStoreCannotBeCreated(
+                StoreFactory.createStore(request),
+                "Unable to determine type of store to create");
+    }
+
+    @Test
+    public void reports_when_a_request_to_create_a_closed_store_does_not_include_opening_date() {
+        StoreWriterRequest request = new StoreWriterRequest(
+                9993,
+                "Store #9993",
                 "",
                 "2025/01/06",
                 ""
         );
 
-        assertThatStoreCannotBeCreatedWithErrorMessageOf(
+        assertThatStoreCannotBeCreated(
                 StoreFactory.createStore(request),
                 "A closed store must have an opening date");
     }
@@ -62,14 +92,14 @@ public class StoreFactoryShould {
     @Test
     public void reports_when_a_request_to_create_an_expected_opening_store_does_include_closing_date() {
         StoreWriterRequest request = new StoreWriterRequest(
-                9994,
-                "Store #9994",
+                9992,
+                "Store #9992",
                 "",
                 "2025/01/06",
                 "Autumn 1972"
         );
 
-        assertThatStoreCannotBeCreatedWithErrorMessageOf(
+        assertThatStoreCannotBeCreated(
                 StoreFactory.createStore(request),
                 "An expected opening store must not have a closing date");
     }
@@ -77,46 +107,16 @@ public class StoreFactoryShould {
     @Test
     public void reports_when_a_request_to_create_an_expected_opening_store_does_include_opening_date() {
         StoreWriterRequest request = new StoreWriterRequest(
-                9993,
-                "Store #9993",
-                "2024/12/25",
-                "",
-                "Spring 2024"
-        );
-
-        assertThatStoreCannotBeCreatedWithErrorMessageOf(
-                StoreFactory.createStore(request),
-                "An expected opening store must not have an opening date");
-    }
-
-    @Test
-    public void reports_when_a_request_includes_all_dates() {
-        StoreWriterRequest request = new StoreWriterRequest(
-                9992,
-                "Store #9992",
-                "2024/12/25",
-                "2025/01/06",
-                "Spring 2024"
-        );
-
-        assertThatStoreCannotBeCreatedWithErrorMessageOf(
-                StoreFactory.createStore(request),
-                "Unable to determine type of store to create");
-    }
-
-    @Test
-    public void reports_when_a_request_does_not_include_any_dates() {
-        StoreWriterRequest request = new StoreWriterRequest(
                 9991,
                 "Store #9991",
+                "2024/12/25",
                 "",
-                "",
-                ""
+                "Spring 2024"
         );
 
-        assertThatStoreCannotBeCreatedWithErrorMessageOf(
+        assertThatStoreCannotBeCreated(
                 StoreFactory.createStore(request),
-                "Unable to determine type of store to create");
+                "An expected opening store must not have an opening date");
     }
 
 
@@ -124,7 +124,7 @@ public class StoreFactoryShould {
         assertThat(storeOrError.isRight()).isTrue();
     }
 
-    private static void assertThatStoreCannotBeCreatedWithErrorMessageOf(Either<String, Store> storeOrError, String expectedErrorMessage) {
+    private static void assertThatStoreCannotBeCreated(Either<String, Store> storeOrError, String expectedErrorMessage) {
         assertThat(storeOrError.isLeft()).isTrue();
         assertThat(storeOrError.getLeft()).isEqualTo(expectedErrorMessage);
     }
