@@ -4,7 +4,11 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 public class openStoreHandler extends StoreFactoryHandler {
-    public Either<String, Store> createStore(StoreWriterRequest request) {
+    public boolean canHandle(StoreWriterRequest request) {
+        return request.storeClosingDate().isEmpty();
+    }
+
+    public Either<String, Store> doCreateStore(StoreWriterRequest request) {
         return Either.right(new Store(
                 request.storeCode(),
                 request.storeName(),

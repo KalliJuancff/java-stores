@@ -1,25 +1,27 @@
 import io.vavr.control.Either;
 
 public class StoreFactory {
-    static Either<String, Store> createStore(StoreWriterRequest request) {
-        if (request.storeCode() == 9995) {
-            return new storeCode9995Handler().createStore(request);
-        }
-        if (request.storeCode() == 9994) {
-            return new storeCode9994Handler().createStore(request);
-        }
-        if (request.storeCode() == 9993) {
-            return new storeCode9993Handler().createStore(request);
-        }
-        if (request.storeCode() == 9992 || request.storeCode() == 9991) {
-            return new storeCode9992Handler().createStore(request);
-        }
+    public static Either<String, Store> createStore(StoreWriterRequest request) {
+        StoreFactoryHandler handler = firstHandler();
+        return handler.createStore(request);
+    }
 
-        if (request.storeOpeningDate().isEmpty() && request.storeClosingDate().isEmpty()) {
-            return new expectedOpenStoreHandler().createStore(request);
-        } else if (request.storeClosingDate().isEmpty()) {
-            return new openStoreHandler().createStore(request);
-        }
-        return new closedStoreHandler().createStore(request);
+    private static StoreFactoryHandler firstHandler() {
+        StoreFactoryHandler h1 = new storeCode9995Handler();
+        StoreFactoryHandler h2 = new storeCode9994Handler();
+        StoreFactoryHandler h3 = new storeCode9993Handler();
+        StoreFactoryHandler h4 = new storeCode9992Or9991Handler();
+        StoreFactoryHandler h5 = new expectedOpenStoreHandler();
+        StoreFactoryHandler h6 = new openStoreHandler();
+        StoreFactoryHandler h7 = new closedStoreHandler();
+
+        h1.setNext(h2);
+        h2.setNext(h3);
+        h3.setNext(h4);
+        h4.setNext(h5);
+        h5.setNext(h6);
+        h6.setNext(h7);
+
+        return h1;
     }
 }
