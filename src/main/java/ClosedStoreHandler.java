@@ -4,11 +4,11 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 public class ClosedStoreHandler extends StoreFactoryHandler {
-    public boolean canHandle(StoreWriterRequest request) {
+    protected boolean canHandle(StoreWriterRequest request) {
         return true;
     }
 
-    public Either<String, Store> doCreateStore(StoreWriterRequest request) {
+    protected Either<String, Store> doCreateStore(StoreWriterRequest request) {
         return Either.right(new Store(
                 request.storeCode(),
                 request.storeName(),
