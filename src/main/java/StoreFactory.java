@@ -20,13 +20,7 @@ public class StoreFactory {
 
         Store store;
         if (request.storeOpeningDate().isEmpty() && request.storeClosingDate().isEmpty()) {
-            store = new Store(
-                    request.storeCode(),
-                    request.storeName(),
-                    Optional.empty(),
-                    Optional.empty(),
-                    request.storeExpectedOpeningDate()
-            );
+            return new expectedOpenStoreHandler().createStore(request);
         } else if (request.storeClosingDate().isEmpty()) {
             store = new Store(
                     request.storeCode(),
