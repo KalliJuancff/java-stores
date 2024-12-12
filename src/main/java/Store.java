@@ -25,6 +25,16 @@ public class Store {
                 "");
     }
 
+    public static Store createAsClosed(int code, String name, LocalDate openingDate, LocalDate closingDate) {
+        return new Store(
+                code,
+                name,
+                Optional.of(openingDate),
+                Optional.of(closingDate),
+                ""
+        );
+    }
+
     public int code() {
         return code;
     }
