@@ -7,11 +7,11 @@ public class StoreFactory {
     }
 
     private static StoreFactoryHandler firstHandler() {
-        StoreFactoryHandler h1 = new OpeningDateInClosedStoreValidationHandler();
-        StoreFactoryHandler h2 = new NoClosingDateInExpectedOpeningStoreValidationHandler();
-        StoreFactoryHandler h3 = new NoOpeningDateInExpectedOpeningStoreValidationHandler();
-        StoreFactoryHandler h4 = new NoAllDatesValidationHandler();
-        StoreFactoryHandler h5 = new SomeDateValidationHandler();
+        StoreFactoryHandler h1 = new SomeDateValidationHandler();
+        StoreFactoryHandler h2 = new NoAllDatesValidationHandler();
+        StoreFactoryHandler h3 = new OpeningDateInClosedStoreValidationHandler();
+        StoreFactoryHandler h4 = new NoClosingDateInExpectedOpeningStoreValidationHandler();
+        StoreFactoryHandler h5 = new NoOpeningDateInExpectedOpeningStoreValidationHandler();
         StoreFactoryHandler h6 = new OpenStoreCreationHandler();
         StoreFactoryHandler h7 = new ClosedStoreCreationHandler();
         StoreFactoryHandler h8 = new ExpectedOpeningStoreCreationHandler();

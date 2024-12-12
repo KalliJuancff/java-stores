@@ -2,7 +2,7 @@ import io.vavr.control.Either;
 
 public class SomeDateValidationHandler extends StoreFactoryHandler {
     protected boolean canHandle(StoreWriterRequest request) {
-        return request.storeCode() == 9991;
+        return request.storeOpeningDate().isEmpty() && request.storeClosingDate().isEmpty() && request.storeExpectedOpeningDate().isEmpty();
     }
 
     protected Either<String, Store> doCreateStore(StoreWriterRequest request) {

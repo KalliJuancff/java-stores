@@ -2,7 +2,7 @@ import io.vavr.control.Either;
 
 public class NoClosingDateInExpectedOpeningStoreValidationHandler extends StoreFactoryHandler {
     protected boolean canHandle(StoreWriterRequest request) {
-        return request.storeCode() == 9994;
+        return !request.storeExpectedOpeningDate().isEmpty() && !request.storeClosingDate().isEmpty();
     }
 
     protected Either<String, Store> doCreateStore(StoreWriterRequest request) {
