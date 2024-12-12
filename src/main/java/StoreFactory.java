@@ -15,7 +15,7 @@ public class StoreFactory {
             return new storeCode9993Handler().createStore(request);
         }
         if (request.storeCode() == 9992 || request.storeCode() == 9991) {
-            return Either.left("Unable to determine type of store to create");
+            return new storeCode9992Handler().createStore(request);
         }
 
         Store store;
