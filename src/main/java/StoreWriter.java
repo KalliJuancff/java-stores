@@ -8,7 +8,7 @@ public class StoreWriter {
     }
 
     public void write(StoreWriterRequest request) {
-        Either<String, Store> store = StoreFactory.createStore(request);
-        repository.write(store.get());
+        Either<String, Store> storeOrError = StoreFactory.createStore(request);
+        repository.write(storeOrError.get());
     }
 }
