@@ -1,3 +1,5 @@
+import io.vavr.control.Either;
+
 public class StoreWriter {
     private final InMemoryStoreRepository repository;
 
@@ -6,7 +8,7 @@ public class StoreWriter {
     }
 
     public void write(StoreWriterRequest request) {
-        Store store = StoreFactory.createStore(request);
-        repository.write(store);
+        Either<String, Store> store = StoreFactory.createStore(request);
+        repository.write(store.get());
     }
 }
