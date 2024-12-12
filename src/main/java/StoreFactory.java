@@ -6,7 +6,7 @@ import java.util.Optional;
 public class StoreFactory {
     static Either<String, Store> createStore(StoreWriterRequest request) {
         if (request.storeCode() == 9995) {
-            return Either.left("A closed store must have an opening date");
+            return new storeCode9995Handler().createStore(request);
         }
         if (request.storeCode() == 9994) {
             return Either.left("An expected opening store must not have a closing date");
