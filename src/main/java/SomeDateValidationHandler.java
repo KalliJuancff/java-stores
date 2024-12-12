@@ -2,7 +2,7 @@ import io.vavr.control.Either;
 
 import java.util.Optional;
 
-public class expectedOpenStoreHandler extends StoreFactoryHandler {
+public class SomeDateValidationHandler extends StoreFactoryHandler {
     public boolean canHandle(StoreWriterRequest request) {
         return request.storeOpeningDate().isEmpty() && request.storeClosingDate().isEmpty();
     }

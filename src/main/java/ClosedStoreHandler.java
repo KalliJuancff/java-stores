@@ -3,9 +3,9 @@ import io.vavr.control.Either;
 import java.time.LocalDate;
 import java.util.Optional;
 
-public class openStoreHandler extends StoreFactoryHandler {
+public class ClosedStoreHandler extends StoreFactoryHandler {
     public boolean canHandle(StoreWriterRequest request) {
-        return request.storeClosingDate().isEmpty();
+        return true;
     }
 
     public Either<String, Store> doCreateStore(StoreWriterRequest request) {
@@ -13,7 +13,8 @@ public class openStoreHandler extends StoreFactoryHandler {
                 request.storeCode(),
                 request.storeName(),
                 Optional.of(LocalDate.parse(request.storeOpeningDate().replace("/", "-"))),
-                Optional.empty(),
-                ""));
+                Optional.of(LocalDate.parse(request.storeClosingDate().replace("/", "-"))),
+                request.storeExpectedOpeningDate()
+        ));
     }
 }

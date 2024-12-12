@@ -1,6 +1,6 @@
 import io.vavr.control.Either;
 
-public class storeCode9995Handler extends StoreFactoryHandler {
+public class OpeningDateInClosedStoreValidationHandler extends StoreFactoryHandler {
     public boolean canHandle(StoreWriterRequest request) {
         return request.storeCode() == 9995;
     }
