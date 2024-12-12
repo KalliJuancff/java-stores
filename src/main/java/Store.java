@@ -16,6 +16,15 @@ public class Store {
         this.expectedOpeningDate = expectedOpeningDate;
     }
 
+    public static Store createAsOpened(int code, String name, LocalDate openingDate) {
+        return new Store(
+                code,
+                name,
+                Optional.of(openingDate),
+                Optional.empty(),
+                "");
+    }
+
     public int code() {
         return code;
     }
@@ -32,7 +41,7 @@ public class Store {
         return closingDate;
     }
 
-    public String  expectedOpeningDate() {
+    public String expectedOpeningDate() {
         return expectedOpeningDate;
     }
 

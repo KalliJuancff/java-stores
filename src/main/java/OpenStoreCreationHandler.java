@@ -1,7 +1,6 @@
 import io.vavr.control.Either;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 public class OpenStoreCreationHandler extends StoreFactoryHandler {
     protected boolean canHandle(StoreWriterRequest request) {
@@ -9,11 +8,10 @@ public class OpenStoreCreationHandler extends StoreFactoryHandler {
     }
 
     protected Either<String, Store> doCreateStore(StoreWriterRequest request) {
-        return Either.right(new Store(
+        Store store = Store.createAsOpened(
                 request.storeCode(),
                 request.storeName(),
-                Optional.of(LocalDate.parse(request.storeOpeningDate().replace("/", "-"))),
-                Optional.empty(),
-                ""));
+                LocalDate.parse(request.storeOpeningDate().replace("/", "-")));
+        return Either.right(store);
     }
 }
