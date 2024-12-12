@@ -1,8 +1,5 @@
 import io.vavr.control.Either;
 
-import java.time.LocalDate;
-import java.util.Optional;
-
 public class StoreFactory {
     static Either<String, Store> createStore(StoreWriterRequest request) {
         if (request.storeCode() == 9995) {
@@ -18,20 +15,11 @@ public class StoreFactory {
             return new storeCode9992Handler().createStore(request);
         }
 
-        Store store;
         if (request.storeOpeningDate().isEmpty() && request.storeClosingDate().isEmpty()) {
             return new expectedOpenStoreHandler().createStore(request);
         } else if (request.storeClosingDate().isEmpty()) {
             return new openStoreHandler().createStore(request);
-        } else {
-            store = new Store(
-                    request.storeCode(),
-                    request.storeName(),
-                    Optional.of(LocalDate.parse(request.storeOpeningDate().replace("/", "-"))),
-                    Optional.of(LocalDate.parse(request.storeClosingDate().replace("/", "-"))),
-                    request.storeExpectedOpeningDate()
-            );
         }
-        return Either.right(store);
+        return new closedStoreHandler().createStore(request);
     }
 }
