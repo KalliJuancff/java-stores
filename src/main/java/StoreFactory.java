@@ -9,7 +9,7 @@ public class StoreFactory {
             return new storeCode9995Handler().createStore(request);
         }
         if (request.storeCode() == 9994) {
-            return Either.left("An expected opening store must not have a closing date");
+            return new storeCode9994Handler().createStore(request);
         }
         if (request.storeCode() == 9993) {
             return Either.left("An expected opening store must not have an opening date");
