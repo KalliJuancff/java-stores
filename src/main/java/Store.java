@@ -35,6 +35,16 @@ public class Store {
         );
     }
 
+    public static Store createAsExpectedOpening(int code, String name, String expectedOpeningDate) {
+        return new Store(
+                code,
+                name,
+                Optional.empty(),
+                Optional.empty(),
+                expectedOpeningDate
+        );
+    }
+
     public int code() {
         return code;
     }
