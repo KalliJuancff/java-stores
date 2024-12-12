@@ -104,6 +104,21 @@ public class StoreFactoryShould {
                 "Unable to determine type of store to create");
     }
 
+    @Test
+    public void reports_when_a_request_does_not_include_any_dates() {
+        StoreWriterRequest request = new StoreWriterRequest(
+                9991,
+                "Store #9991",
+                "",
+                "",
+                ""
+        );
+
+        assertThatStoreCannotBeCreatedWithErrorMessageOf(
+                StoreFactory.createStore(request),
+                "Unable to determine type of store to create");
+    }
+
 
     private static void assertThatStoreCanBeCreated(Either<String, Store> storeOrError) {
         assertThat(storeOrError.isRight()).isTrue();
