@@ -74,6 +74,21 @@ public class StoreFactoryShould {
                 "An expected opening store must not have a closing date");
     }
 
+    @Test
+    public void report_when_a_request_to_create_an_expected_opening_store_does_include_opening_date() {
+        StoreWriterRequest request = new StoreWriterRequest(
+                9993,
+                "Store #9993",
+                "2024/12/25",
+                "",
+                "Spring 2024"
+        );
+
+        assertThatStoreCannotBeCreatedWithErrorMessageOf(
+                StoreFactory.createStore(request),
+                "An expected opening store must not have an opening date");
+    }
+
 
     private static void assertThatStoreCanBeCreated(Either<String, Store> storeOrError) {
         assertThat(storeOrError.isRight()).isTrue();

@@ -11,6 +11,9 @@ public class StoreFactory {
         if (request.storeCode() == 9994) {
             return Either.left("An expected opening store must not have a closing date");
         }
+        if (request.storeCode() == 9993) {
+            return Either.left("An expected opening store must not have an opening date");
+        }
 
         Store store;
         if (request.storeOpeningDate().isEmpty() && request.storeClosingDate().isEmpty()) {
