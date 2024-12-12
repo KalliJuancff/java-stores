@@ -2,7 +2,7 @@ import io.vavr.control.Either;
 
 public class NoAllDatesValidationHandler extends StoreFactoryHandler {
     protected boolean canHandle(StoreWriterRequest request) {
-        return request.storeCode() == 9992 || request.storeCode() == 9991;
+        return request.storeCode() == 9992;
     }
 
     protected Either<String, Store> doCreateStore(StoreWriterRequest request) {

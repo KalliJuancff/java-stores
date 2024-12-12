@@ -14,6 +14,7 @@ public class StoreFactory {
         StoreFactoryHandler h5 = new SomeDateValidationHandler();
         StoreFactoryHandler h6 = new OpenStoreCreationHandler();
         StoreFactoryHandler h7 = new ClosedStoreCreationHandler();
+        StoreFactoryHandler h8 = new ExpectedOpeningStoreCreationHandler();
 
         h1.setNext(h2);
         h2.setNext(h3);
@@ -21,6 +22,7 @@ public class StoreFactory {
         h4.setNext(h5);
         h5.setNext(h6);
         h6.setNext(h7);
+        h7.setNext(h8);
 
         return h1;
     }

@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public class ClosedStoreCreationHandler extends StoreFactoryHandler {
     protected boolean canHandle(StoreWriterRequest request) {
-        return true;
+        return request.storeExpectedOpeningDate().isEmpty();
     }
 
     protected Either<String, Store> doCreateStore(StoreWriterRequest request) {
