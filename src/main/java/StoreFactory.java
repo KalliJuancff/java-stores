@@ -22,12 +22,7 @@ public class StoreFactory {
         if (request.storeOpeningDate().isEmpty() && request.storeClosingDate().isEmpty()) {
             return new expectedOpenStoreHandler().createStore(request);
         } else if (request.storeClosingDate().isEmpty()) {
-            store = new Store(
-                    request.storeCode(),
-                    request.storeName(),
-                    Optional.of(LocalDate.parse(request.storeOpeningDate().replace("/", "-"))),
-                    Optional.empty(),
-                    "");
+            return new openStoreHandler().createStore(request);
         } else {
             store = new Store(
                     request.storeCode(),
