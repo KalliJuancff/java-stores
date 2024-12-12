@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class ClosedStoreCreationHandler extends StoreFactoryHandler {
     protected boolean canHandle(StoreWriterRequest request) {
-        return request.storeExpectedOpeningDate().isEmpty();
+        return !request.storeOpeningDate().isEmpty() && !request.storeClosingDate().isEmpty() && request.storeExpectedOpeningDate().isEmpty();
     }
 
     protected Either<String, Store> doCreateStore(StoreWriterRequest request) {
