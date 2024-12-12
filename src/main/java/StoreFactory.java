@@ -1,3 +1,5 @@
+import io.vavr.control.Either;
+
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -29,5 +31,9 @@ public class StoreFactory {
             );
         }
         return store;
+    }
+
+    public static Either<String,Store> createStore2(StoreWriterRequest request) {
+        return Either.left("A closed store must have an opening date");
     }
 }

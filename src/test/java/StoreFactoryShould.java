@@ -1,3 +1,4 @@
+import io.vavr.control.Either;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -46,5 +47,22 @@ public class StoreFactoryShould {
         Store store = StoreFactory.createStore(request);
 
         assertThat(store.status()).isEqualTo("EXPECTED_OPENING");
+    }
+
+
+    @Test
+    public void report_when_a_request_to_create_a_closed_store_does_not_include_opening_date() {
+        StoreWriterRequest request = new StoreWriterRequest(
+                9999,
+                "Store #9999",
+                "",
+                "2025/01/06",
+                ""
+        );
+
+        Either<String, Store> storeOrError = StoreFactory.createStore2(request);
+
+        assertThat(storeOrError.isLeft()).isTrue();
+        assertThat(storeOrError.getLeft()).isEqualTo("A closed store must have an opening date");
     }
 }
