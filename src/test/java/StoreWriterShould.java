@@ -39,7 +39,7 @@ public class StoreWriterShould {
                 Optional.of(LocalDate.parse(storeOpeningDate.replace("/", "-"))),
                 Optional.empty(),
                 storeExpectedOpeningDate,
-                "OPEN"
+                StoreState.OPEN
         );
     }
 
@@ -65,7 +65,7 @@ public class StoreWriterShould {
                 Optional.of(LocalDate.parse(storeOpeningDate.replace("/", "-"))),
                 Optional.of(LocalDate.parse(storeClosingDate.replace("/", "-"))),
                 storeExpectedOpeningDate,
-                "CLOSED"
+                StoreState.CLOSED
         );
     }
 
@@ -91,11 +91,11 @@ public class StoreWriterShould {
                 Optional.empty(),
                 Optional.empty(),
                 storeExpectedOpeningDate,
-                "EXPECTED_OPENING"
+                StoreState.EXPECTED_OPENING
         );
     }
 
-    private void assertStore(int storeCode, String storeName, Optional<LocalDate> storeOpeningDate, Optional<Object> storeClosingDate, String storeExpectedOpeningDate, String status) {
+    private void assertStore(int storeCode, String storeName, Optional<LocalDate> storeOpeningDate, Optional<Object> storeClosingDate, String storeExpectedOpeningDate, StoreState status) {
         Store store = storeRepository.getFirst();
         assertThat(store.code()).isEqualTo(storeCode);
         assertThat(store.name()).isEqualTo(storeName);

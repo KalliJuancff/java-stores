@@ -7,13 +7,15 @@ public class Store {
     private final Optional<LocalDate> openingDate;
     private final Optional<LocalDate> closingDate;
     private final String expectedOpeningDate;
+    private final StoreState status;
 
-    private Store(int code, String name, Optional<LocalDate> openingDate, Optional<LocalDate> closingDate, String expectedOpeningDate) {
+    private Store(int code, String name, Optional<LocalDate> openingDate, Optional<LocalDate> closingDate, String expectedOpeningDate, StoreState status) {
         this.code = code;
         this.name = name;
         this.openingDate = openingDate;
         this.closingDate = closingDate;
         this.expectedOpeningDate = expectedOpeningDate;
+        this.status = status;
     }
 
     public static Store createAsOpened(int code, String name, LocalDate openingDate) {
@@ -22,7 +24,9 @@ public class Store {
                 name,
                 Optional.of(openingDate),
                 Optional.empty(),
-                "");
+                "",
+                StoreState.OPEN
+        );
     }
 
     public static Store createAsClosed(int code, String name, LocalDate openingDate, LocalDate closingDate) {
@@ -31,7 +35,8 @@ public class Store {
                 name,
                 Optional.of(openingDate),
                 Optional.of(closingDate),
-                ""
+                "",
+                StoreState.CLOSED
         );
     }
 
@@ -41,7 +46,8 @@ public class Store {
                 name,
                 Optional.empty(),
                 Optional.empty(),
-                expectedOpeningDate
+                expectedOpeningDate,
+                StoreState.EXPECTED_OPENING
         );
     }
 
@@ -65,15 +71,7 @@ public class Store {
         return expectedOpeningDate;
     }
 
-    public String status() {
-        if (openingDate.isEmpty() && closingDate.isEmpty()) {
-            return "EXPECTED_OPENING";
-        }
-
-        if (closingDate.isPresent()) {
-            return "CLOSED";
-        }
-
-        return "OPEN";
+    public StoreState status() {
+        return status;
     }
 }
