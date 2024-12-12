@@ -60,9 +60,13 @@ public class StoreFactoryShould {
                 ""
         );
 
-        Either<String, Store> storeOrError = StoreFactory.createStore2(request);
+        assertThatStoreCanBeCreatedWithErrorMessageOf(
+                StoreFactory.createStore2(request),
+                "A closed store must have an opening date");
+    }
 
+    private static void assertThatStoreCanBeCreatedWithErrorMessageOf(Either<String, Store> storeOrError, String expectedErrorMessage) {
         assertThat(storeOrError.isLeft()).isTrue();
-        assertThat(storeOrError.getLeft()).isEqualTo("A closed store must have an opening date");
+        assertThat(storeOrError.getLeft()).isEqualTo(expectedErrorMessage);
     }
 }
