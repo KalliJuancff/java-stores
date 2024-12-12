@@ -6,6 +6,6 @@ public class SomeDateValidationHandler extends StoreFactoryHandler {
     }
 
     protected Either<String, Store> doCreateStore(StoreWriterRequest request) {
-        return Either.left("Unable to determine type of store to create");
+        return Either.left("Unable to determine type of store to create: no dates are present");
     }
 }
