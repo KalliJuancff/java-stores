@@ -1,3 +1,5 @@
+package domain;
+
 import io.vavr.control.Either;
 
 import java.time.LocalDate;

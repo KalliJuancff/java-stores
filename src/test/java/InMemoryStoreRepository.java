@@ -1,3 +1,6 @@
+import domain.Store;
+import domain.StoreRepository;
+
 public class InMemoryStoreRepository implements StoreRepository {
     private Store _store;
 

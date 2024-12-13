@@ -1,3 +1,5 @@
+package domain;
+
 public record StoreSaverRequest(
         int storeCode,
         String storeName,

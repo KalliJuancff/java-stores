@@ -1,3 +1,5 @@
+package domain;
+
 import io.vavr.control.Either;
 
 public class ExpectedOpeningStoreCreationHandler extends StoreFactoryHandler {

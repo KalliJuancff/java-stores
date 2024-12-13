@@ -1,3 +1,10 @@
+package application;
+
+import domain.Store;
+import domain.StoreFactory;
+import domain.StoreRepository;
+import domain.StoreSaverRequest;
+import domain.InvalidStoreSaverRequestException;
 import io.vavr.control.Either;
 
 public class StoreSaver {
