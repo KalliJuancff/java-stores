@@ -31,7 +31,7 @@ public class StoreSaverShould {
                 storeClosingDate,
                 storeExpectedOpeningDate);
 
-        storeSaver.upsert(request);
+        storeSaver.save(request);
 
         assertStore(
                 storeCode,
@@ -57,7 +57,7 @@ public class StoreSaverShould {
                 storeClosingDate,
                 storeExpectedOpeningDate);
 
-        storeSaver.upsert(request);
+        storeSaver.save(request);
 
         assertStore(
                 storeCode,
@@ -83,7 +83,7 @@ public class StoreSaverShould {
                 storeClosingDate,
                 storeExpectedOpeningDate);
 
-        storeSaver.upsert(request);
+        storeSaver.save(request);
 
         assertStore(
                 storeCode,

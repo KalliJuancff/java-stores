@@ -7,7 +7,7 @@ public class StoreSaver {
         this.repository = repository;
     }
 
-    public void upsert(StoreSaverRequest request) {
+    public void save(StoreSaverRequest request) {
         Either<String, Store> storeOrError = StoreFactory.createStore(request);
         repository.write(storeOrError.get());
     }
