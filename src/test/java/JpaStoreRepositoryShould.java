@@ -73,4 +73,23 @@ public class JpaStoreRepositoryShould {
         assertThat(storeModel.getClosingDate()).isEqualTo(LocalDate.of(2025, 12, 25));
         assertThat(storeModel.getExpectedOpeningDate()).isNull();
     }
+
+    @Test
+    public void insert_an_expected_opening_store_that_does_not_exist() {
+        StoreRepository sut = new JpaStoreRepository();
+        Store store = Store.createAsExpectedOpening(
+                3,
+                "Store 3",
+                "January 2014");
+
+        sut.upsert(store);
+
+        StoreModel storeModel = em.find(StoreModel.class, 3);
+        assertThat(storeModel).isNotNull();
+        assertThat(storeModel.getCode()).isEqualTo(3);
+        assertThat(storeModel.getName()).isEqualTo("Store 3");
+        assertThat(storeModel.getOpeningDate()).isNull();
+        assertThat(storeModel.getClosingDate()).isNull();
+        assertThat(storeModel.getExpectedOpeningDate()).isEqualTo("January 2014");
+    }
 }
