@@ -33,7 +33,7 @@ public class StoreSaverShould {
 
         storeSaver.save(request);
 
-        assertStore(
+        assertThatStoreWasInserted(
                 storeCode,
                 storeName,
                 Optional.of(LocalDate.parse(storeOpeningDate.replace("/", "-"))),
@@ -59,7 +59,7 @@ public class StoreSaverShould {
 
         storeSaver.save(request);
 
-        assertStore(
+        assertThatStoreWasInserted(
                 storeCode,
                 storeName,
                 Optional.of(LocalDate.parse(storeOpeningDate.replace("/", "-"))),
@@ -85,7 +85,7 @@ public class StoreSaverShould {
 
         storeSaver.save(request);
 
-        assertStore(
+        assertThatStoreWasInserted(
                 storeCode,
                 storeName,
                 Optional.empty(),
@@ -95,7 +95,7 @@ public class StoreSaverShould {
         );
     }
 
-    private void assertStore(int storeCode, String storeName, Optional<LocalDate> storeOpeningDate, Optional<Object> storeClosingDate, String storeExpectedOpeningDate, StoreState status) {
+    private void assertThatStoreWasInserted(int storeCode, String storeName, Optional<LocalDate> storeOpeningDate, Optional<Object> storeClosingDate, String storeExpectedOpeningDate, StoreState status) {
         Store store = storeRepository.getFirst();
         assertThat(store.code()).isEqualTo(storeCode);
         assertThat(store.name()).isEqualTo(storeName);
