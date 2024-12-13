@@ -3,6 +3,7 @@ package infrastructure;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Entity
 public class StoreModel {
@@ -14,15 +15,15 @@ public class StoreModel {
     private LocalDate openingDate;
     @Column(nullable = true)
     private LocalDate closingDate;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String expectedOpeningDate;
 
-    public StoreModel(int code, String name, LocalDate openingDate, LocalDate closingDate, String expectedOpeningDate) {
+    public StoreModel(int code, String name, Optional<LocalDate> openingDate, Optional<LocalDate> closingDate, String expectedOpeningDate) {
         this.code = code;
         this.name = name;
-        this.openingDate = openingDate;
-        this.closingDate = closingDate;
-        this.expectedOpeningDate = expectedOpeningDate;
+        this.openingDate = openingDate.orElse(null);
+        this.closingDate = closingDate.orElse(null);
+        this.expectedOpeningDate = expectedOpeningDate.isEmpty() ? null : expectedOpeningDate;
     }
 
     public StoreModel() {

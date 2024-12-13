@@ -22,12 +22,11 @@ public class JpaStoreRepository implements StoreRepository {
     }
 
     private StoreModel mapFrom(Store store) {
-        // TODO: FIX this (openingDate and closingDate are always sent as now)
         return new StoreModel(
                 store.code(),
                 store.name(),
-                store.openingDate().orElse(null),
-                store.closingDate().orElse(null),
+                store.openingDate(),
+                store.closingDate(),
                 store.expectedOpeningDate());
     }
 }
