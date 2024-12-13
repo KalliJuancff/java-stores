@@ -1,7 +1,7 @@
 public class InMemoryStoreRepository {
     private Store _store;
 
-    public void write(Store store) {
+    public void upsert(Store store) {
         _store = store;
     }
 

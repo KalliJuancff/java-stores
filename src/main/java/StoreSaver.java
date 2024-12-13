@@ -9,6 +9,6 @@ public class StoreSaver {
 
     public void save(StoreSaverRequest request) {
         Either<String, Store> storeOrError = StoreFactory.createStore(request);
-        repository.write(storeOrError.get());
+        repository.upsert(storeOrError.get());
     }
 }
