@@ -1,4 +1,4 @@
-public class InMemoryStoreRepository {
+public class InMemoryStoreRepository implements StoreRepository {
     private Store _store;
 
     public void upsert(Store store) {

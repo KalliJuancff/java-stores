@@ -1,9 +1,9 @@
 import io.vavr.control.Either;
 
 public class StoreSaver {
-    private final InMemoryStoreRepository repository;
+    private final StoreRepository repository;
 
-    public StoreSaver(InMemoryStoreRepository repository) {
+    public StoreSaver(StoreRepository repository) {
         this.repository = repository;
     }
 
@@ -14,6 +14,7 @@ public class StoreSaver {
             throw new InvalidStoreSaverRequestException(reason);
         }
 
-        repository.upsert(storeOrError.get());
+        Store store = storeOrError.get();
+        repository.upsert(store);
     }
 }
