@@ -6,6 +6,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
+import java.util.Optional;
+
 public class JpaStoreRepository implements StoreRepository {
     public void upsert(Store store) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-integration-tests");

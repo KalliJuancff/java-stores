@@ -34,39 +34,19 @@ public class StoreModel {
         return code;
     }
 
-    public void setCode(int code) {
-        this.code = code;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public LocalDate getOpeningDate() {
         return openingDate;
     }
 
-    public void setOpeningDate(LocalDate openingDate) {
-        this.openingDate = openingDate;
-    }
-
     public LocalDate getClosingDate() {
         return closingDate;
     }
 
-    public void setClosingDate(LocalDate closingDate) {
-        this.closingDate = closingDate;
-    }
-
     public String getExpectedOpeningDate() {
         return expectedOpeningDate;
-    }
-
-    public void setExpectedOpeningDate(String expectedOpeningDate) {
-        this.expectedOpeningDate = expectedOpeningDate;
     }
 }
