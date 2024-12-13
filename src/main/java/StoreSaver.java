@@ -10,7 +10,8 @@ public class StoreSaver {
     public void save(StoreSaverRequest request) {
         Either<String, Store> storeOrError = StoreFactory.createStore(request);
         if (storeOrError.isLeft()) {
-            throw new InvalidStoreSaverRequestException("Store cannot be saved (" + storeOrError.getLeft() + ")");
+            String reason = storeOrError.getLeft();
+            throw new InvalidStoreSaverRequestException(reason);
         }
 
         repository.upsert(storeOrError.get());
