@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -6,6 +7,8 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StoreSaverShould {
     private InMemoryStoreRepository storeRepository;
@@ -103,5 +106,23 @@ public class StoreSaverShould {
         assertThat(store.closingDate()).isEqualTo(storeClosingDate);
         assertThat(store.expectedOpeningDate()).isEqualTo(storeExpectedOpeningDate);
         assertThat(store.status()).isEqualTo(status);
+    }
+
+
+    @Test
+    public void throw_an_exception_when_the_store_cannot_be_created() {
+        StoreSaverRequest request = new StoreSaverRequest(
+                1000,
+                "Store #1000",
+                "",
+                "",
+                ""
+        );
+
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            storeSaver.save(request);
+        });
+
+        assertEquals("Store cannot be saved", exception.getMessage());
     }
 }
