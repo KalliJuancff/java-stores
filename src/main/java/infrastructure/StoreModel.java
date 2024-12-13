@@ -7,7 +7,6 @@ import java.time.LocalDate;
 @Entity
 public class StoreModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int code;
     @Column(nullable = false)
     private String name;
@@ -24,6 +23,10 @@ public class StoreModel {
         this.openingDate = openingDate;
         this.closingDate = closingDate;
         this.expectedOpeningDate = expectedOpeningDate;
+    }
+
+    public StoreModel() {
+        // Do-nothing (Hibernate requirement)
     }
 
     public int getCode() {
