@@ -44,5 +44,10 @@ public class JpaStoreRepositoryShould {
 
         StoreModel storeModel = em.find(StoreModel.class, 1);
         assertThat(storeModel).isNotNull();
+        assertThat(storeModel.getCode()).isEqualTo(1);
+        assertThat(storeModel.getName()).isEqualTo("Store 1");
+        assertThat(storeModel.getOpeningDate()).isEqualTo(LocalDate.of(2025, 1, 1));
+        assertThat(storeModel.getClosingDate()).isNull();
+        assertThat(storeModel.getExpectedOpeningDate()).isEmpty();
     }
 }
