@@ -1,5 +1,6 @@
 package domain;
 
+import domain.handlers.*;
 import io.vavr.control.Either;
 
 public class StoreFactory {

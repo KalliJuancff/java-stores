@@ -1,5 +1,8 @@
-package domain;
+package domain.handlers;
 
+import domain.Store;
+import domain.StoreFactoryHandler;
+import domain.StoreSaverRequest;
 import io.vavr.control.Either;
 
 public class SomeDateValidationHandler extends StoreFactoryHandler {
