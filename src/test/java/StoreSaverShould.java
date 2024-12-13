@@ -7,14 +7,14 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class StoreWriterShould {
+public class StoreSaverShould {
     private InMemoryStoreRepository storeRepository;
-    private StoreWriter storeWriter;
+    private StoreSaver storeSaver;
 
     @BeforeEach
     public void setUp() {
         storeRepository = new InMemoryStoreRepository();
-        storeWriter = new StoreWriter(storeRepository);
+        storeSaver = new StoreSaver(storeRepository);
     }
 
     @ParameterizedTest
@@ -23,7 +23,7 @@ public class StoreWriterShould {
             "2000, Store #2000, 2024/12/23, '', ''",
             "3000, Store #3000, 2025/01/14, '', ''"
     })
-    public void write_an_open_store(int storeCode, String storeName, String storeOpeningDate, String storeClosingDate, String storeExpectedOpeningDate) {
+    public void insert_an_open_store(int storeCode, String storeName, String storeOpeningDate, String storeClosingDate, String storeExpectedOpeningDate) {
         StoreWriterRequest request = new StoreWriterRequest(
                 storeCode,
                 storeName,
@@ -31,7 +31,7 @@ public class StoreWriterShould {
                 storeClosingDate,
                 storeExpectedOpeningDate);
 
-        storeWriter.write(request);
+        storeSaver.upsert(request);
 
         assertStore(
                 storeCode,
@@ -49,7 +49,7 @@ public class StoreWriterShould {
             "2000, Store #2000, 2024/12/23, 2024/11/25, ''",
             "3000, Store #3000, 2025/01/14, 2025/01/29, ''"
     })
-    public void write_a_closed_store(int storeCode, String storeName, String storeOpeningDate, String storeClosingDate, String storeExpectedOpeningDate) {
+    public void insert_a_closed_store(int storeCode, String storeName, String storeOpeningDate, String storeClosingDate, String storeExpectedOpeningDate) {
         StoreWriterRequest request = new StoreWriterRequest(
                 storeCode,
                 storeName,
@@ -57,7 +57,7 @@ public class StoreWriterShould {
                 storeClosingDate,
                 storeExpectedOpeningDate);
 
-        storeWriter.write(request);
+        storeSaver.upsert(request);
 
         assertStore(
                 storeCode,
@@ -75,7 +75,7 @@ public class StoreWriterShould {
             "2000, Store #2000, '', '', January 2032",
             "3000, Store #3000, '', '', Winter 2003"
     })
-    public void write_an_expected_opening_store(int storeCode, String storeName, String storeOpeningDate, String storeClosingDate, String storeExpectedOpeningDate) {
+    public void insert_an_expected_opening_store(int storeCode, String storeName, String storeOpeningDate, String storeClosingDate, String storeExpectedOpeningDate) {
         StoreWriterRequest request = new StoreWriterRequest(
                 storeCode,
                 storeName,
@@ -83,7 +83,7 @@ public class StoreWriterShould {
                 storeClosingDate,
                 storeExpectedOpeningDate);
 
-        storeWriter.write(request);
+        storeSaver.upsert(request);
 
         assertStore(
                 storeCode,
