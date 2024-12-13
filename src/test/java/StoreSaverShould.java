@@ -119,7 +119,7 @@ public class StoreSaverShould {
                 ""
         );
 
-        Exception exception = assertThrows(RuntimeException.class, () -> {
+        Exception exception = assertThrows(InvalidStoreSaverRequestException.class, () -> {
             storeSaver.save(request);
         });
 
