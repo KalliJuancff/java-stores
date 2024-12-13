@@ -6,8 +6,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-import java.util.Optional;
-
 public class JpaStoreRepository implements StoreRepository {
     public void upsert(Store store) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-integration-tests");
@@ -16,7 +14,7 @@ public class JpaStoreRepository implements StoreRepository {
         StoreModel storeModel = mapFrom(store);
 
         em.getTransaction().begin();
-        em.persist(storeModel);
+        em.merge(storeModel);
         em.getTransaction().commit();
 
         em.close();
