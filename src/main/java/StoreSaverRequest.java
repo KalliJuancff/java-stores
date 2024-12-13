@@ -1,4 +1,4 @@
-public record StoreWriterRequest(
+public record StoreSaverRequest(
         int storeCode,
         String storeName,
         String storeOpeningDate,

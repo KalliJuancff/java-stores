@@ -24,7 +24,7 @@ public class StoreSaverShould {
             "3000, Store #3000, 2025/01/14, '', ''"
     })
     public void insert_an_open_store(int storeCode, String storeName, String storeOpeningDate, String storeClosingDate, String storeExpectedOpeningDate) {
-        StoreWriterRequest request = new StoreWriterRequest(
+        StoreSaverRequest request = new StoreSaverRequest(
                 storeCode,
                 storeName,
                 storeOpeningDate,
@@ -50,7 +50,7 @@ public class StoreSaverShould {
             "3000, Store #3000, 2025/01/14, 2025/01/29, ''"
     })
     public void insert_a_closed_store(int storeCode, String storeName, String storeOpeningDate, String storeClosingDate, String storeExpectedOpeningDate) {
-        StoreWriterRequest request = new StoreWriterRequest(
+        StoreSaverRequest request = new StoreSaverRequest(
                 storeCode,
                 storeName,
                 storeOpeningDate,
@@ -76,7 +76,7 @@ public class StoreSaverShould {
             "3000, Store #3000, '', '', Winter 2003"
     })
     public void insert_an_expected_opening_store(int storeCode, String storeName, String storeOpeningDate, String storeClosingDate, String storeExpectedOpeningDate) {
-        StoreWriterRequest request = new StoreWriterRequest(
+        StoreSaverRequest request = new StoreSaverRequest(
                 storeCode,
                 storeName,
                 storeOpeningDate,

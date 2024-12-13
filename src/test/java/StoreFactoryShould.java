@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class StoreFactoryShould {
     @Test
     public void create_an_open_store() {
-        StoreWriterRequest request = new StoreWriterRequest(
+        StoreSaverRequest request = new StoreSaverRequest(
                 9999,
                 "Store #9999",
                 "2025/12/25",
@@ -19,7 +19,7 @@ public class StoreFactoryShould {
 
     @Test
     public void create_a_closed_store() {
-        StoreWriterRequest request = new StoreWriterRequest(
+        StoreSaverRequest request = new StoreSaverRequest(
                 9998,
                 "Store #9998",
                 "2024/12/25",
@@ -32,7 +32,7 @@ public class StoreFactoryShould {
 
     @Test
     public void create_an_expected_opening_store() {
-        StoreWriterRequest request = new StoreWriterRequest(
+        StoreSaverRequest request = new StoreSaverRequest(
                 9997,
                 "Store #9997",
                 "",
@@ -46,7 +46,7 @@ public class StoreFactoryShould {
 
     @Test
     public void reports_when_a_request_does_not_include_any_dates() {
-        StoreWriterRequest request = new StoreWriterRequest(
+        StoreSaverRequest request = new StoreSaverRequest(
                 9995,
                 "Store #9995",
                 "",
@@ -61,7 +61,7 @@ public class StoreFactoryShould {
 
     @Test
     public void reports_when_a_request_includes_all_dates() {
-        StoreWriterRequest request = new StoreWriterRequest(
+        StoreSaverRequest request = new StoreSaverRequest(
                 9994,
                 "Store #9994",
                 "2024/12/25",
@@ -76,7 +76,7 @@ public class StoreFactoryShould {
 
     @Test
     public void reports_when_a_request_to_create_a_closed_store_does_not_include_opening_date() {
-        StoreWriterRequest request = new StoreWriterRequest(
+        StoreSaverRequest request = new StoreSaverRequest(
                 9993,
                 "Store #9993",
                 "",
@@ -91,7 +91,7 @@ public class StoreFactoryShould {
 
     @Test
     public void reports_when_a_request_to_create_an_expected_opening_store_does_include_closing_date() {
-        StoreWriterRequest request = new StoreWriterRequest(
+        StoreSaverRequest request = new StoreSaverRequest(
                 9992,
                 "Store #9992",
                 "",
@@ -106,7 +106,7 @@ public class StoreFactoryShould {
 
     @Test
     public void reports_when_a_request_to_create_an_expected_opening_store_does_include_opening_date() {
-        StoreWriterRequest request = new StoreWriterRequest(
+        StoreSaverRequest request = new StoreSaverRequest(
                 9991,
                 "Store #9991",
                 "2024/12/25",

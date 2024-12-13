@@ -1,7 +1,7 @@
 import io.vavr.control.Either;
 
 public class StoreFactory {
-    public static Either<String, Store> createStore(StoreWriterRequest request) {
+    public static Either<String, Store> createStore(StoreSaverRequest request) {
         StoreFactoryHandler handler = firstHandler();
         return handler.createStore(request);
     }

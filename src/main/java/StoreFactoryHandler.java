@@ -7,7 +7,7 @@ public abstract class StoreFactoryHandler {
         this.next = next;
     }
 
-    public Either<String, Store> createStore(StoreWriterRequest request) {
+    public Either<String, Store> createStore(StoreSaverRequest request) {
         if (canHandle(request)) {
             return this.doCreateStore(request);
         }
@@ -15,6 +15,6 @@ public abstract class StoreFactoryHandler {
         return next.createStore(request);
     }
 
-    protected abstract boolean canHandle(StoreWriterRequest request);
-    protected abstract Either<String, Store> doCreateStore(StoreWriterRequest request);
+    protected abstract boolean canHandle(StoreSaverRequest request);
+    protected abstract Either<String, Store> doCreateStore(StoreSaverRequest request);
 }
