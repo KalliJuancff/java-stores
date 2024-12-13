@@ -14,7 +14,7 @@ public class StoreFactoryShould {
                 ""
         );
 
-        assertThatStoreCanBeCreated(StoreFactory.createStore(request));
+        assertThatStoreCanBeCreated(request);
     }
 
     @Test
@@ -27,7 +27,7 @@ public class StoreFactoryShould {
                 ""
         );
 
-        assertThatStoreCanBeCreated(StoreFactory.createStore(request));
+        assertThatStoreCanBeCreated(request);
     }
 
     @Test
@@ -40,7 +40,7 @@ public class StoreFactoryShould {
                 "Summer 2025"
         );
 
-        assertThatStoreCanBeCreated(StoreFactory.createStore(request));
+        assertThatStoreCanBeCreated(request);
     }
 
 
@@ -55,7 +55,7 @@ public class StoreFactoryShould {
         );
 
         assertThatStoreCannotBeCreated(
-                StoreFactory.createStore(request),
+                request,
                 "Unable to determine type of store to create: no dates are present");
     }
 
@@ -70,7 +70,7 @@ public class StoreFactoryShould {
         );
 
         assertThatStoreCannotBeCreated(
-                StoreFactory.createStore(request),
+                request,
                 "Unable to determine type of store to create: all dates are present");
     }
 
@@ -85,7 +85,7 @@ public class StoreFactoryShould {
         );
 
         assertThatStoreCannotBeCreated(
-                StoreFactory.createStore(request),
+                request,
                 "A closed store must have an opening date");
     }
 
@@ -100,7 +100,7 @@ public class StoreFactoryShould {
         );
 
         assertThatStoreCannotBeCreated(
-                StoreFactory.createStore(request),
+                request,
                 "An expected opening store must not have a closing date");
     }
 
@@ -115,16 +115,20 @@ public class StoreFactoryShould {
         );
 
         assertThatStoreCannotBeCreated(
-                StoreFactory.createStore(request),
+                request,
                 "An expected opening store must not have an opening date");
     }
 
 
-    private static void assertThatStoreCanBeCreated(Either<String, Store> storeOrError) {
+    private static void assertThatStoreCanBeCreated(StoreSaverRequest request) {
+        Either<String, Store> storeOrError = StoreFactory.createStore(request);
+
         assertThat(storeOrError.isRight()).isTrue();
     }
 
-    private static void assertThatStoreCannotBeCreated(Either<String, Store> storeOrError, String expectedErrorMessage) {
+    private static void assertThatStoreCannotBeCreated(StoreSaverRequest request, String expectedErrorMessage) {
+        Either<String, Store> storeOrError = StoreFactory.createStore(request);
+
         assertThat(storeOrError.isLeft()).isTrue();
         assertThat(storeOrError.getLeft()).isEqualTo(expectedErrorMessage);
     }
