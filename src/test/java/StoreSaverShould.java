@@ -123,6 +123,6 @@ public class StoreSaverShould {
             storeSaver.save(request);
         });
 
-        assertEquals("Store cannot be saved", exception.getMessage());
+        assertEquals("Store cannot be saved (Unable to determine type of store to create: no dates are present)", exception.getMessage());
     }
 }
