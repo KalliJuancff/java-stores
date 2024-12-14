@@ -1,3 +1,5 @@
+package integration;
+
 import domain.Store;
 import domain.StoreRepository;
 import infrastructure.JpaStoreRepository;

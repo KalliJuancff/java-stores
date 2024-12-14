@@ -1,3 +1,5 @@
+package shared;
+
 import domain.Store;
 import domain.StoreRepository;
 

@@ -1,3 +1,5 @@
+package acceptance;
+
 import application.StoreSaver;
 import domain.Store;
 import domain.StoreSaverRequest;
@@ -7,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import shared.InMemoryStoreRepository;
 
 import java.time.LocalDate;
 import java.util.Optional;
