@@ -13,7 +13,7 @@ public class StoreFactoryShould {
     public void create_an_open_store() {
         StoreSaverRequest request = new StoreSaverRequest(
                 9999,
-                "domain.Store #9999",
+                "Store #9999",
                 "2025/12/25",
                 "",
                 ""
@@ -26,7 +26,7 @@ public class StoreFactoryShould {
     public void create_a_closed_store() {
         StoreSaverRequest request = new StoreSaverRequest(
                 9998,
-                "domain.Store #9998",
+                "Store #9998",
                 "2024/12/25",
                 "2025/01/06",
                 ""
@@ -39,7 +39,7 @@ public class StoreFactoryShould {
     public void create_an_expected_opening_store() {
         StoreSaverRequest request = new StoreSaverRequest(
                 9997,
-                "domain.Store #9997",
+                "Store #9997",
                 "",
                 "",
                 "Summer 2025"
@@ -53,7 +53,7 @@ public class StoreFactoryShould {
     public void reports_when_a_request_does_not_include_any_dates() {
         StoreSaverRequest request = new StoreSaverRequest(
                 9995,
-                "domain.Store #9995",
+                "Store #9995",
                 "",
                 "",
                 ""
@@ -68,7 +68,7 @@ public class StoreFactoryShould {
     public void reports_when_a_request_includes_all_dates() {
         StoreSaverRequest request = new StoreSaverRequest(
                 9994,
-                "domain.Store #9994",
+                "Store #9994",
                 "2024/12/25",
                 "2025/01/06",
                 "Spring 2024"
@@ -83,7 +83,7 @@ public class StoreFactoryShould {
     public void reports_when_a_request_to_create_a_closed_store_does_not_include_opening_date() {
         StoreSaverRequest request = new StoreSaverRequest(
                 9993,
-                "domain.Store #9993",
+                "Store #9993",
                 "",
                 "2025/01/06",
                 ""
@@ -98,7 +98,7 @@ public class StoreFactoryShould {
     public void reports_when_a_request_to_create_an_expected_opening_store_does_include_closing_date() {
         StoreSaverRequest request = new StoreSaverRequest(
                 9992,
-                "domain.Store #9992",
+                "Store #9992",
                 "",
                 "2025/01/06",
                 "Autumn 1972"
@@ -113,7 +113,7 @@ public class StoreFactoryShould {
     public void reports_when_a_request_to_create_an_expected_opening_store_does_include_opening_date() {
         StoreSaverRequest request = new StoreSaverRequest(
                 9991,
-                "domain.Store #9991",
+                "Store #9991",
                 "2024/12/25",
                 "",
                 "Spring 2024"
@@ -128,7 +128,7 @@ public class StoreFactoryShould {
     public void reports_when_a_request_to_create_a_closed_store_has_the_closing_date_prior_to_the_opening_date() {
         StoreSaverRequest request = new StoreSaverRequest(
                 9990,
-                "domain.Store #9990",
+                "Store #9990",
                 "2025/01/06",
                 "2025/01/05",
                 ""

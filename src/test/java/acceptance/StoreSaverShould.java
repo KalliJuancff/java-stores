@@ -30,9 +30,9 @@ public class StoreSaverShould {
 
     @ParameterizedTest
     @CsvSource({
-            "1000, domain.Store #1000, 2003/12/25, '', ''",
-            "2000, domain.Store #2000, 2024/12/23, '', ''",
-            "3000, domain.Store #3000, 2025/01/14, '', ''"
+            "1000, Store #1000, 2003/12/25, '', ''",
+            "2000, Store #2000, 2024/12/23, '', ''",
+            "3000, Store #3000, 2025/01/14, '', ''"
     })
     public void insert_an_open_store(int storeCode, String storeName, String storeOpeningDate, String storeClosingDate, String storeExpectedOpeningDate) {
         StoreSaverRequest request = new StoreSaverRequest(
@@ -56,9 +56,9 @@ public class StoreSaverShould {
 
     @ParameterizedTest
     @CsvSource({
-            "1000, domain.Store #1000, 2003/12/25, 2005/01/06, ''",
-            "2000, domain.Store #2000, 2024/12/23, 2024/12/25, ''",
-            "3000, domain.Store #3000, 2025/01/14, 2025/01/29, ''"
+            "1000, Store #1000, 2003/12/25, 2005/01/06, ''",
+            "2000, Store #2000, 2024/12/23, 2024/12/25, ''",
+            "3000, Store #3000, 2025/01/14, 2025/01/29, ''"
     })
     public void insert_a_closed_store(int storeCode, String storeName, String storeOpeningDate, String storeClosingDate, String storeExpectedOpeningDate) {
         StoreSaverRequest request = new StoreSaverRequest(
@@ -82,9 +82,9 @@ public class StoreSaverShould {
 
     @ParameterizedTest
     @CsvSource({
-            "1000, domain.Store #1000, '', '', First quarter of 2003",
-            "2000, domain.Store #2000, '', '', January 2032",
-            "3000, domain.Store #3000, '', '', Winter 2003"
+            "1000, Store #1000, '', '', First quarter of 2003",
+            "2000, Store #2000, '', '', January 2032",
+            "3000, Store #3000, '', '', Winter 2003"
     })
     public void insert_an_expected_opening_store(int storeCode, String storeName, String storeOpeningDate, String storeClosingDate, String storeExpectedOpeningDate) {
         StoreSaverRequest request = new StoreSaverRequest(
@@ -121,7 +121,7 @@ public class StoreSaverShould {
     public void throw_an_exception_when_the_store_cannot_be_created() {
         StoreSaverRequest request = new StoreSaverRequest(
                 1000,
-                "domain.Store #1000",
+                "Store #1000",
                 "",
                 "",
                 ""
@@ -132,6 +132,6 @@ public class StoreSaverShould {
             storeSaver.save(request);
         });
 
-        assertEquals("domain.Store cannot be saved (" + storeFactoryExceptionMessage + ")", exception.getMessage());
+        assertEquals("Store cannot be saved (" + storeFactoryExceptionMessage + ")", exception.getMessage());
     }
 }
