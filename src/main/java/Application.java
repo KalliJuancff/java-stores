@@ -18,6 +18,24 @@ public class Application {
                 "2025/12/25",
                 "",
                 ""));
+        useCase.save(new StoreSaverRequest(
+                1238,
+                "Store 1238",
+                "2014/01/14",
+                "",
+                ""));
+        useCase.save(new StoreSaverRequest(
+                1240,
+                "Store 1240",
+                "",
+                "",
+                "2025"));
+        useCase.save(new StoreSaverRequest(
+                1234,
+                "Store 1234 [Moved]",
+                "2025/12/25",
+                "2026/01/06",
+                ""));
 
         Stream<Store> stores = repository.searchAll();
         stores.forEach(System.out::println);

@@ -22,10 +22,31 @@ public class ApplicationTest {
                 "2025/12/25",
                 "",
                 ""));
+        useCase.save(new StoreSaverRequest(
+                1238,
+                "Store 1238",
+                "2014/01/14",
+                "",
+                ""));
+        useCase.save(new StoreSaverRequest(
+                1240,
+                "Store 1240",
+                "",
+                "",
+                "2025"));
+        useCase.save(new StoreSaverRequest(
+                1234,
+                "Store 1234 [Moved]",
+                "2025/12/25",
+                "2026/01/06",
+                ""));
 
         Stream<Store> stores = repository.searchAll();
 
-        assertThat(stores).contains(Store.createAsOpened(1234, "Store 1234", LocalDate.of(2025, 12, 25)));
+        assertThat(stores).contains(
+                Store.createAsClosed(1234, "Store 1234 [Moved]", LocalDate.of(2025, 12, 25), LocalDate.of(2026, 1, 6)),
+                Store.createAsOpened(1238, "Store 1238", LocalDate.of(2014, 1, 14)),
+                Store.createAsExpectedOpening(1240, "Store 1240", "2025"));
 
         repository.close();
     }
