@@ -18,12 +18,12 @@ public class StoreModel {
     @Column(nullable = true)
     private String expectedOpeningDate;
 
-    public StoreModel(int code, String name, Optional<LocalDate> openingDate, Optional<LocalDate> closingDate, String expectedOpeningDate) {
+    public StoreModel(int code, String name, LocalDate openingDate, LocalDate closingDate, String expectedOpeningDate) {
         this.code = code;
         this.name = name;
-        this.openingDate = openingDate.orElse(null);
-        this.closingDate = closingDate.orElse(null);
-        this.expectedOpeningDate = expectedOpeningDate.isEmpty() ? null : expectedOpeningDate;
+        this.openingDate = openingDate;
+        this.closingDate = closingDate;
+        this.expectedOpeningDate = expectedOpeningDate;
     }
 
     public StoreModel() {

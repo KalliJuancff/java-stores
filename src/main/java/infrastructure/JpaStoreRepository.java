@@ -25,8 +25,8 @@ public class JpaStoreRepository implements StoreRepository {
         return new StoreModel(
                 store.code(),
                 store.name(),
-                store.openingDate(),
-                store.closingDate(),
-                store.expectedOpeningDate());
+                store.openingDate().orElse(null),
+                store.closingDate().orElse(null),
+                store.expectedOpeningDate().isEmpty() ? null : store.expectedOpeningDate());
     }
 }
