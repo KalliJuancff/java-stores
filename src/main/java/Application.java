@@ -2,7 +2,7 @@ import application.StoreSaver;
 import domain.Store;
 import domain.StoreRepository;
 import domain.StoreSaverRequest;
-import infrastructure.InMemoryStoreRepository;
+import infrastructure.JpaStoreRepository;
 
 import java.util.stream.Stream;
 
@@ -10,7 +10,7 @@ public class Application {
     public static void main(String[] args) {
         System.out.println("Starting Store Application!");
 
-        StoreRepository repository = new InMemoryStoreRepository();
+        StoreRepository repository = new JpaStoreRepository();
         var useCase = new StoreSaver(repository);
         useCase.save(new StoreSaverRequest(
                 1234,
