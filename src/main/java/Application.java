@@ -1,6 +1,5 @@
 import application.StoreSaver;
 import domain.Store;
-import domain.StoreRepository;
 import domain.StoreSaverRequest;
 import infrastructure.JpaStoreRepository;
 
@@ -10,7 +9,7 @@ public class Application {
     public static void main(String[] args) {
         System.out.println("Starting Store Application!");
 
-        StoreRepository repository = new JpaStoreRepository();
+        var repository = new JpaStoreRepository();
         var useCase = new StoreSaver(repository);
         useCase.save(new StoreSaverRequest(
                 1234,
@@ -39,6 +38,8 @@ public class Application {
 
         Stream<Store> stores = repository.searchAll();
         stores.forEach(System.out::println);
+
+        repository.close();
 
         System.out.println("Ending Store Application!");
     }
