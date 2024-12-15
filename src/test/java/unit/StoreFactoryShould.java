@@ -124,6 +124,21 @@ public class StoreFactoryShould {
                 "An expected opening store must not have an opening date");
     }
 
+    @Test
+    public void reports_when_a_request_to_create_a_closed_store_has_the_closing_date_prior_to_the_opening_date() {
+        StoreSaverRequest request = new StoreSaverRequest(
+                9990,
+                "domain.Store #9990",
+                "2025/01/06",
+                "2025/01/05",
+                ""
+        );
+
+        assertThatStoreCannotBeCreated(
+                request,
+                "Closing date cannot be before opening date");
+    }
+
 
     private static void assertThatStoreCanBeCreated(StoreSaverRequest request) {
         Either<String, Store> storeOrError = StoreFactory.createStore(request);

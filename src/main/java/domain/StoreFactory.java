@@ -18,8 +18,9 @@ public class StoreFactory {
         StoreFactoryHandler h5 = new NoOpeningDateInExpectedOpeningStoreValidationHandler();
 
         StoreFactoryHandler h6 = new OpenStoreCreationHandler();
-        StoreFactoryHandler h7 = new ClosedStoreCreationHandler();
-        StoreFactoryHandler h8 = new ExpectedOpeningStoreCreationHandler();
+        StoreFactoryHandler h7 = new NoClosingDateBeforeOpeningDateValidationHandler();
+        StoreFactoryHandler h8 = new ClosedStoreCreationHandler();
+        StoreFactoryHandler h9 = new ExpectedOpeningStoreCreationHandler();
 
         h1.setNext(h2);
         h2.setNext(h3);
@@ -28,6 +29,7 @@ public class StoreFactory {
         h5.setNext(h6);
         h6.setNext(h7);
         h7.setNext(h8);
+        h8.setNext(h9);
 
         return h1;
     }
