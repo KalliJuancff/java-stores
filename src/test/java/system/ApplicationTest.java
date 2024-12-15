@@ -2,9 +2,13 @@ package system;
 
 import application.StoreSaver;
 import domain.Store;
+import domain.StoreRepository;
 import domain.StoreSaverRequest;
+import infrastructure.AppConfig;
 import infrastructure.JpaStoreRepository;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.time.LocalDate;
 import java.util.stream.Stream;
@@ -14,8 +18,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ApplicationTest {
     @Test
     public void test_entire_application_with_real_dependencies() {
-        JpaStoreRepository repository = new JpaStoreRepository();
-        StoreSaver useCase = new StoreSaver(repository);
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        StoreSaver useCase = context.getBean(StoreSaver.class);
+        StoreRepository repository = context.getBean(StoreRepository.class);
         useCase.save(new StoreSaverRequest(
                 1234,
                 "Store 1234",
@@ -48,6 +53,12 @@ public class ApplicationTest {
                 Store.createAsOpened(1238, "Store 1238", LocalDate.of(2014, 1, 14)),
                 Store.createAsExpectedOpening(1240, "Store 1240", "2025"));
 
-        repository.close();
+        closeRepositoryIfApplicable(repository);
+    }
+
+    private static void closeRepositoryIfApplicable(StoreRepository repository) {
+        if (repository instanceof JpaStoreRepository) {
+            ((JpaStoreRepository) repository).close();
+        }
     }
 }
