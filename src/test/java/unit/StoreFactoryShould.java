@@ -61,7 +61,7 @@ public class StoreFactoryShould {
 
         assertThatStoreCannotBeCreated(
                 request,
-                "Unable to determine type of store to create: no dates are present");
+                "Unable to determine type of store to create because no dates are present");
     }
 
     @Test
@@ -76,7 +76,7 @@ public class StoreFactoryShould {
 
         assertThatStoreCannotBeCreated(
                 request,
-                "Unable to determine type of store to create: all dates are present");
+                "Unable to determine type of store to create because all dates are present");
     }
 
     @Test

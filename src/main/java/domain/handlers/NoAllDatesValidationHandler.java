@@ -11,6 +11,6 @@ public class NoAllDatesValidationHandler extends StoreFactoryHandler {
     }
 
     protected Either<String, Store> doCreateStore(StoreSaverRequest request) {
-        return Either.left("Unable to determine type of store to create: all dates are present");
+        return Either.left("Unable to determine type of store to create because all dates are present");
     }
 }
