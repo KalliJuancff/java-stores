@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ApplicationTest {
+public class CliTest {
     @Test
     public void test_entire_application_with_real_dependencies() {
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
