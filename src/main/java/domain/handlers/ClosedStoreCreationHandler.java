@@ -16,8 +16,8 @@ public class ClosedStoreCreationHandler extends StoreFactoryHandler {
         Store store = Store.createAsClosed(
                 request.storeCode(),
                 request.storeName(),
-                LocalDate.parse(request.storeOpeningDate().replace("/", "-")),
-                LocalDate.parse(request.storeClosingDate().replace("/", "-")));
+                request.storeOpeningDateAsLocalDate(),
+                request.storeClosingDateAsLocalDate());
         return Either.right(store);
     }
 }

@@ -5,8 +5,6 @@ import domain.StoreFactoryHandler;
 import domain.StoreSaverRequest;
 import io.vavr.control.Either;
 
-import java.time.LocalDate;
-
 public class OpenStoreCreationHandler extends StoreFactoryHandler {
     protected boolean canHandle(StoreSaverRequest request) {
         return !request.storeOpeningDate().isEmpty() && request.storeClosingDate().isEmpty() && request.storeExpectedOpeningDate().isEmpty();
@@ -16,7 +14,8 @@ public class OpenStoreCreationHandler extends StoreFactoryHandler {
         Store store = Store.createAsOpened(
                 request.storeCode(),
                 request.storeName(),
-                LocalDate.parse(request.storeOpeningDate().replace("/", "-")));
+                request.storeOpeningDateAsLocalDate());
         return Either.right(store);
     }
+
 }
