@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 public class JpaStoreRepository implements StoreRepository {
     public void upsert(Store store) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-integration-tests");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-repositories");
         EntityManager em = emf.createEntityManager();
 
         StoreModel storeModel = mapFrom(store);
@@ -34,7 +34,7 @@ public class JpaStoreRepository implements StoreRepository {
     }
 
     public Stream<Store> searchAll() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-integration-tests");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-repositories");
         EntityManager em = emf.createEntityManager();
 
         List<StoreModel> storeModels = em
