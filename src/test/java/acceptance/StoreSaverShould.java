@@ -57,7 +57,7 @@ public class StoreSaverShould {
     @ParameterizedTest
     @CsvSource({
             "1000, domain.Store #1000, 2003/12/25, 2005/01/06, ''",
-            "2000, domain.Store #2000, 2024/12/23, 2024/11/25, ''",
+            "2000, domain.Store #2000, 2024/12/23, 2024/12/25, ''",
             "3000, domain.Store #3000, 2025/01/14, 2025/01/29, ''"
     })
     public void insert_a_closed_store(int storeCode, String storeName, String storeOpeningDate, String storeClosingDate, String storeExpectedOpeningDate) {
