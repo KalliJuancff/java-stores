@@ -7,12 +7,12 @@ import java.util.Optional;
 public class Store {
     private final int code;
     private final String name;
-    private final Optional<LocalDate> openingDate;
-    private final Optional<LocalDate> closingDate;
+    private final LocalDate openingDate;
+    private final LocalDate closingDate;
     private final String expectedOpeningDate;
     private final StoreState status;
 
-    private Store(int code, String name, Optional<LocalDate> openingDate, Optional<LocalDate> closingDate, String expectedOpeningDate, StoreState status) {
+    private Store(int code, String name, LocalDate openingDate, LocalDate closingDate, String expectedOpeningDate, StoreState status) {
         this.code = code;
         this.name = name;
         this.openingDate = openingDate;
@@ -25,8 +25,8 @@ public class Store {
         return new Store(
                 code,
                 name,
-                Optional.of(openingDate),
-                Optional.empty(),
+                openingDate,
+                null,
                 "",
                 StoreState.OPEN
         );
@@ -36,8 +36,8 @@ public class Store {
         return new Store(
                 code,
                 name,
-                Optional.of(openingDate),
-                Optional.of(closingDate),
+                openingDate,
+                closingDate,
                 "",
                 StoreState.CLOSED
         );
@@ -47,8 +47,8 @@ public class Store {
         return new Store(
                 code,
                 name,
-                Optional.empty(),
-                Optional.empty(),
+                null,
+                null,
                 expectedOpeningDate,
                 StoreState.EXPECTED_OPENING
         );
@@ -63,11 +63,11 @@ public class Store {
     }
 
     public Optional<LocalDate> openingDate() {
-        return openingDate;
+        return Optional.ofNullable(openingDate);
     }
 
     public Optional<LocalDate> closingDate() {
-        return closingDate;
+        return Optional.ofNullable(closingDate);
     }
 
     public String expectedOpeningDate() {
