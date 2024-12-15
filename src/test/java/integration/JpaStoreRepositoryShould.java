@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 import java.time.LocalDate;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -114,5 +115,31 @@ public class JpaStoreRepositoryShould {
         StoreModel storeModel = em.find(StoreModel.class, 4);
         assertThat(storeModel.getName()).isEqualTo("Store #4 (reformed)");
         assertThat(storeModel.getExpectedOpeningDate()).isEqualTo("December 2014");
+    }
+
+
+    @Test
+    public void fetch_all_stores() {
+        StoreRepository sut = new JpaStoreRepository();
+        Store store1 = Store.createAsOpened(
+                1,
+                "Store #1",
+                LocalDate.of(2025, 1, 1));
+        Store store2 = Store.createAsClosed(
+                2,
+                "Store #2",
+                LocalDate.of(2025, 12, 23),
+                LocalDate.of(2025, 12, 25));
+        Store store3 = Store.createAsExpectedOpening(
+                3,
+                "Store #3",
+                "January 2014");
+        sut.upsert(store1);
+        sut.upsert(store2);
+        sut.upsert(store3);
+
+        Stream<Store> stores = sut.searchAll();
+
+        assertThat(stores).containsExactlyInAnyOrder(store1, store2, store3);
     }
 }

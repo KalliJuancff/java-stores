@@ -1,6 +1,7 @@
 package domain;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Optional;
 
 public class Store {
@@ -75,5 +76,16 @@ public class Store {
 
     public StoreState status() {
         return status;
+    }
+
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Store store = (Store) o;
+        return code == store.code;
+    }
+
+    public int hashCode() {
+        return Objects.hashCode(code);
     }
 }
