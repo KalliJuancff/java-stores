@@ -88,4 +88,16 @@ public class Store {
     public int hashCode() {
         return Objects.hashCode(code);
     }
+
+    @Override
+    public String toString() {
+        return "Store{" +
+                "code=" + code +
+                ", name='" + name + '\'' +
+                ", openingDate=" + openingDate +
+                ", closingDate=" + closingDate +
+                ", expectedOpeningDate='" + expectedOpeningDate + '\'' +
+                ", status=" + status +
+                '}';
+    }
 }
