@@ -10,18 +10,20 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class JpaStoreRepository implements StoreRepository {
-    public void upsert(Store store) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-repositories");
-        EntityManager em = emf.createEntityManager();
+    private final EntityManagerFactory emf;
+    private final EntityManager em;
 
+    public JpaStoreRepository() {
+        emf = Persistence.createEntityManagerFactory("jpa-repositories");
+        em = emf.createEntityManager();
+    }
+
+    public void upsert(Store store) {
         StoreModel storeModel = mapFrom(store);
 
         em.getTransaction().begin();
         em.merge(storeModel);
         em.getTransaction().commit();
-
-        em.close();
-        emf.close();
     }
 
     private StoreModel mapFrom(Store store) {
@@ -34,18 +36,11 @@ public class JpaStoreRepository implements StoreRepository {
     }
 
     public Stream<Store> searchAll() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-repositories");
-        EntityManager em = emf.createEntityManager();
-
         List<StoreModel> storeModels = em
                 .createQuery("SELECT s FROM StoreModel s", StoreModel.class)
                 .getResultList();
-        Stream<Store> result = storeModels.stream().map(this::mapTo);
 
-        em.close();
-        emf.close();
-
-        return result;
+        return storeModels.stream().map(this::mapTo);
     }
 
     private Store mapTo(StoreModel storeModel) {
@@ -66,5 +61,10 @@ public class JpaStoreRepository implements StoreRepository {
                 storeModel.getCode(),
                 storeModel.getName(),
                 storeModel.getOpeningDate());
+    }
+
+    public void close() {
+        em.close();
+        emf.close();
     }
 }

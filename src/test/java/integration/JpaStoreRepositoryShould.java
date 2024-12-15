@@ -26,6 +26,10 @@ public class JpaStoreRepositoryShould {
     public void setUp() {
         emf = Persistence.createEntityManagerFactory("jpa-integration-tests");
         em = emf.createEntityManager();
+
+        em.getTransaction().begin();
+        em.createQuery("DELETE FROM StoreModel").executeUpdate();
+        em.getTransaction().commit();
     }
 
     @AfterEach

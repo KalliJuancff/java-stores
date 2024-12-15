@@ -26,5 +26,7 @@ public class ApplicationTest {
         Stream<Store> stores = repository.searchAll();
 
         assertThat(stores).contains(Store.createAsOpened(1234, "Store 1234", LocalDate.of(2025, 12, 25)));
+
+        repository.close();
     }
 }
