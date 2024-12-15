@@ -126,7 +126,7 @@ public class StoreSaverShould {
                 "",
                 ""
         );
-        String storeFactoryExceptionMessage = "Unable to determine type of store to create: no dates are present";
+        String storeFactoryExceptionMessage = "Unable to determine type of store to create because no dates are present";
 
         Exception exception = assertThrows(InvalidStoreSaverRequestException.class, () -> {
             storeSaver.save(request);
