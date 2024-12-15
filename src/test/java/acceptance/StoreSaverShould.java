@@ -5,11 +5,11 @@ import domain.Store;
 import domain.StoreSaverRequest;
 import domain.InvalidStoreSaverRequestException;
 import domain.StoreState;
+import infrastructure.InMemoryStoreRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import shared.InMemoryStoreRepository;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -107,7 +107,7 @@ public class StoreSaverShould {
     }
 
     private void assertThatStoreWasInserted(int storeCode, String storeName, Optional<LocalDate> storeOpeningDate, Optional<Object> storeClosingDate, String storeExpectedOpeningDate, StoreState status) {
-        Store store = storeRepository.getFirst();
+        Store store = storeRepository.searchAll().findFirst().orElseThrow();
         assertThat(store.code()).isEqualTo(storeCode);
         assertThat(store.name()).isEqualTo(storeName);
         assertThat(store.openingDate()).isEqualTo(storeOpeningDate);
