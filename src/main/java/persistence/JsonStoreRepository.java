@@ -26,6 +26,7 @@ public class JsonStoreRepository implements StoreRepository {
                         new JsonPrimitive(src.format(DateTimeFormatter.ISO_LOCAL_DATE)))
                 .registerTypeAdapter(LocalDate.class, (JsonDeserializer<LocalDate>) (json, typeOfT, context) ->
                         LocalDate.parse(json.getAsString(), DateTimeFormatter.ISO_LOCAL_DATE))
+                .setPrettyPrinting()
                 .create();
     }
 
