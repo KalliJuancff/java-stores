@@ -1,9 +1,10 @@
-package persistence;
+package cli;
 
 import application.StoreSaver;
 import domain.StoreRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import persistence.JpaStoreRepository;
 
 @Configuration
 public class AppConfig {

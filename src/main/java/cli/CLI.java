@@ -5,7 +5,6 @@ import domain.InvalidStoreSaverRequestException;
 import domain.Store;
 import domain.StoreRepository;
 import domain.StoreSaverRequest;
-import persistence.AppConfig;
 import persistence.JpaStoreRepository;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

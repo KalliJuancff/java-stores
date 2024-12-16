@@ -4,7 +4,7 @@ import application.StoreSaver;
 import domain.Store;
 import domain.StoreRepository;
 import domain.StoreSaverRequest;
-import persistence.AppConfig;
+import cli.AppConfig;
 import persistence.JpaStoreRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
