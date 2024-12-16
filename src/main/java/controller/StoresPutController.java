@@ -26,21 +26,27 @@ public class StoresPutController {
         try {
             storeSaver.save(request);
 
-            String stringBody = "{" +
-                    "\"ok\": \"true\"," +
-                    "\"message\": \"Store created successfully\"" +
-                    "}";
             return ResponseEntity.status(HttpStatus.CREATED)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .body(stringBody);
+                    .body(getStringBodyWhenSuccessfully());
         } catch (Exception e) {
-            String stringBody = "{" +
-                    "\"ok\": \"false\"," +
-                    "\"message\": \"" + e.getMessage() + "\"" +
-                    "}";
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .body(stringBody);
+                    .body(getStringBodyWhenFailure(e));
         }
+    }
+
+    private static String getStringBodyWhenSuccessfully() {
+        return "{" +
+                "\"ok\": \"true\"," +
+                "\"message\": \"Store created successfully\"" +
+                "}";
+    }
+
+    private static String getStringBodyWhenFailure(Exception e) {
+        return "{" +
+                "\"ok\": \"false\"," +
+                "\"message\": \"" + e.getMessage() + "\"" +
+                "}";
     }
 }
