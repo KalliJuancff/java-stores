@@ -24,8 +24,12 @@ public class StoresPutController {
         StoreSaverRequest request = gson.fromJson(body, StoreSaverRequest.class);
         storeSaver.save(request);
 
+        String stringBody = "{" +
+            "\"ok\": \"true\"," +
+            "\"message\": \"Store created successfully\"" +
+            "}";
         return ResponseEntity.status(HttpStatus.CREATED)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body("{\"ok\": \"true\"}");
+                .body(stringBody);
     }
 }

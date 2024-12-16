@@ -50,7 +50,8 @@ public class StoresPutControllerFeature {
                 .put("/stores/4321")
         .then()
                 .statusCode(201)
-                .body("ok", equalTo("true"));
+                .body("ok", equalTo("true"))
+                .body("message", equalTo("Store created successfully"));
 
         ensureThatStoreWasPersistedWithValues("4321", "Store #4321", "2003-12-23", "2003-12-25", "");
     }
