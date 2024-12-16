@@ -22,14 +22,21 @@ public class StoresPutController {
     public ResponseEntity<String> saveStore(@PathVariable int code, @RequestBody String body) {
         Gson gson = new Gson();
         StoreSaverRequest request = gson.fromJson(body, StoreSaverRequest.class);
-        storeSaver.save(request);
 
-        String stringBody = "{" +
-            "\"ok\": \"true\"," +
-            "\"message\": \"Store created successfully\"" +
-            "}";
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(stringBody);
+        try {
+            storeSaver.save(request);
+
+            String stringBody = "{" +
+                    "\"ok\": \"true\"," +
+                    "\"message\": \"Store created successfully\"" +
+                    "}";
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(stringBody);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body("");
+        }
     }
 }

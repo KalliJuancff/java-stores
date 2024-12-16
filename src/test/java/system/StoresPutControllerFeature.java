@@ -33,7 +33,7 @@ public class StoresPutControllerFeature {
 
     @Test
     public void create_a_valid_new_store() throws IOException {
-        String requestBody = """
+        String validRequestBody = """
                 {
                     "storeCode": "4321",
                     "storeName": "Store #4321",
@@ -45,7 +45,7 @@ public class StoresPutControllerFeature {
 
         given()
                 .contentType("application/json")
-                .body(requestBody)
+                .body(validRequestBody)
         .when()
                 .put("/stores/4321")
         .then()
@@ -81,5 +81,27 @@ public class StoresPutControllerFeature {
         assertThat(store.openingDate().get()).isEqualTo(LocalDate.parse(openingDate));
         assertThat(store.closingDate().get()).isEqualTo(LocalDate.parse(closingDate));
         assertThat(store.expectedOpeningDate()).isEqualTo(expectedOpeningDate);
+    }
+
+
+    @Test
+    public void create_an_invalid_new_store() {
+        String invalidRequestBody = """
+                {
+                    "storeCode": "3210",
+                    "storeName": "Store #3210",
+                    "storeOpeningDate": "",
+                    "storeClosingDate": "",
+                    "storeExpectedOpeningDate": ""
+                }
+                """;
+
+        given()
+                .contentType("application/json")
+                .body(invalidRequestBody)
+                .when()
+                .put("/stores/3210")
+                .then()
+                .statusCode(400);
     }
 }
