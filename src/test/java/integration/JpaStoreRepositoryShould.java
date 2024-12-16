@@ -2,8 +2,8 @@ package integration;
 
 import domain.Store;
 import domain.StoreRepository;
-import infrastructure.JpaStoreRepository;
-import infrastructure.StoreModel;
+import persistence.JpaStoreRepository;
+import persistence.StoreModel;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;

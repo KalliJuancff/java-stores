@@ -1,9 +1,8 @@
-package infrastructure;
+package persistence;
 
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 @Entity
 public class StoreModel {
