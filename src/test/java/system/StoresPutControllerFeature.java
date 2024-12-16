@@ -18,6 +18,7 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 public class StoresPutControllerFeature {
     public static final String STORE_JSON = "stores.json";
@@ -48,7 +49,8 @@ public class StoresPutControllerFeature {
         .when()
                 .put("/stores/4321")
         .then()
-                .statusCode(201);
+                .statusCode(201)
+                .body("ok", equalTo("true"));
 
         ensureThatStoreWasPersistedWithValues("4321", "Store #4321", "2003-12-23", "2003-12-25", "");
     }
