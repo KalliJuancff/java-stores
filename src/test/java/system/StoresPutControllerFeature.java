@@ -4,13 +4,20 @@ import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 import static io.restassured.RestAssured.given;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class StoresPutControllerFeature {
     @BeforeEach
-    void setUp() {
+    void setUp() throws IOException {
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = 8080;
+
+        Files.deleteIfExists(Path.of("store.json"));
     }
 
     @Test
@@ -32,5 +39,7 @@ public class StoresPutControllerFeature {
                 .put("/stores/4321")
         .then()
                 .statusCode(201);
+
+        assertThat(Files.exists(Path.of("store.json"))).isTrue();
     }
 }
