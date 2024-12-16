@@ -17,11 +17,11 @@ import java.util.stream.Stream;
 public class CLI {
     public static void main(String[] args) throws IOException {
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-        StoreSaver useCase = context.getBean(StoreSaver.class);
+        StoreSaver storeSaver = context.getBean(StoreSaver.class);  // Use Case
         StoreRepository repository = context.getBean(StoreRepository.class);
 
-        boolean exit = false;
-        while (!exit) {
+        boolean exit;
+        do {
             System.out.println("=======================================");
             System.out.println("WELCOME TO THE STORE MANAGEMENT SYSTEM!");
             System.out.println("Stores in the system:");
@@ -31,8 +31,9 @@ public class CLI {
             System.out.println();
 
             try {
-                StoreSaverRequest request = getRequestFromKeyboard();
-                useCase.save(request);
+                StoreSaverRequest request = createRequestFromKeyboard();
+                storeSaver.save(request);
+                exit = false;
             } catch (InvalidStoreSaverRequestException e) {
                 System.out.println("DOMAIN ERROR: invalid request provided ('" + e.getMessage() + "')");
                 exit = true;
@@ -40,17 +41,17 @@ public class CLI {
                 System.out.println("RUNTIME ERROR: invalid request provided ('" + e.getMessage() + "')");
                 exit = true;
             }
-        }
+        } while (!exit);
 
         closeRepositoryIfApplicable(repository);
     }
 
-    private static StoreSaverRequest getRequestFromKeyboard() {
+    private static StoreSaverRequest createRequestFromKeyboard() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter the store code:");
         int code = scanner.nextInt();
-        scanner.nextLine();
+        scanner.nextLine();  // Consume the newline character ("mandatory")
 
         System.out.println("Enter the store name:");
         String name = scanner.nextLine();
