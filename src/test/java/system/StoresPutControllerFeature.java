@@ -102,6 +102,7 @@ public class StoresPutControllerFeature {
                 .when()
                 .put("/stores/3210")
                 .then()
-                .statusCode(400);
+                .statusCode(400)
+                .body("ok", equalTo("false"));
     }
 }

@@ -34,9 +34,12 @@ public class StoresPutController {
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(stringBody);
         } catch (Exception e) {
+            String stringBody = "{" +
+                    "\"ok\": \"false\"," +
+                    "}";
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .body("");
+                    .body(stringBody);
         }
     }
 }
