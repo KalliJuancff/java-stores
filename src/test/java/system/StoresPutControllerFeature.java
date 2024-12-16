@@ -103,6 +103,7 @@ public class StoresPutControllerFeature {
                 .put("/stores/3210")
                 .then()
                 .statusCode(400)
-                .body("ok", equalTo("false"));
+                .body("ok", equalTo("false"))
+                .body("message", equalTo("Store cannot be saved (Unable to determine type of store to create because no dates are present)"));
     }
 }

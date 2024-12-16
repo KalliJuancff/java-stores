@@ -36,6 +36,7 @@ public class StoresPutController {
         } catch (Exception e) {
             String stringBody = "{" +
                     "\"ok\": \"false\"," +
+                    "\"message\": \"" + e.getMessage() + "\"" +
                     "}";
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .contentType(MediaType.APPLICATION_JSON)
