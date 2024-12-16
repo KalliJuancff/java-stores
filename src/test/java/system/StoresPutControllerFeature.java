@@ -32,7 +32,7 @@ public class StoresPutControllerFeature {
     }
 
     @Test
-    public void create_a_new_store() throws IOException {
+    public void create_a_valid_new_store() throws IOException {
         String requestBody = """
                 {
                     "storeCode": "4321",
