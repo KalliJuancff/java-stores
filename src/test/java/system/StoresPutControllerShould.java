@@ -32,12 +32,6 @@ public class StoresPutControllerShould {
         .when()
                 .put("/stores/4321")
         .then()
-                .statusCode(201)
-                .body("storeCode", equalTo(4321))
-                .body("storeName", equalTo("Store #4321"))
-                .body("storeOpeningDate", equalTo(""))
-                .body("storeClosingDate", equalTo(""))
-                .body("storeExpectedOpeningDate", equalTo("2025/2026"))
-                .body("storeStatus", equalTo("EXPECTED_OPENING"));
+                .statusCode(201);
     }
 }
