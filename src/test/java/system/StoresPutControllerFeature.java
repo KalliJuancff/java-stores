@@ -5,9 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.core.IsEqual.equalTo;
 
-public class StoresPutControllerShould {
+public class StoresPutControllerFeature {
     @BeforeEach
     void setUp() {
         RestAssured.baseURI = "http://localhost";
